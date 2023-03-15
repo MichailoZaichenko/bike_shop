@@ -8,7 +8,7 @@
 
         <div class="jumbotron">
           <h1>{{request.user.first_name}} {{request.user.last_name}}</h1>
-          <p><strong>Пошта:</strong> {{request.user.email}}</p>
+          <p><strong>Електронна пошта:</strong> {{request.user.email}}</p>
           <p><strong>Ім'я:</strong> {{request.user.username}}</p>
           <p><a class="btn btn-primary btn-large" href="{% url 'store:add-address' %}">Add Address »</a> <a class="btn btn-outline-primary btn-large" href="#">My Orders »</a></p>
         </div>
