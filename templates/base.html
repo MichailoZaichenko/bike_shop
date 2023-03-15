@@ -2,10 +2,10 @@
 
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block metatitle %}Jewelry Shop| Django Ecommerce{% endblock metatitle %}</title>
+    <title>{% block metatitle %}Wellbike{% endblock metatitle %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -21,27 +21,31 @@
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel2/assets/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/owl.carousel2/assets/owl.theme.default.css' %}">
     <!-- Google fonts-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="{% static 'css/style.default.css' %}" id="theme-stylesheet">
-    <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}">
-    <!-- Tweaks for older IEs--><!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
-  </head>
-  <body>
-    <div class="page-holder">
-      {% include 'navbar.html' %}
+    <link rel="shortcut icon" href="{% static 'icons/favicon.png' %}">
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+{% block head %}{% endblock head %}
+</head>
+<body>
+<div class="page-holder">
+    {% include 'navbar.html' %}
 
-      {% block content %}
+    {% block content %}
 
-      {% endblock content %}
+    {% endblock content %}
 
-      {% block payment-gateway %}{% endblock payment-gateway %}
-      
-      {% include 'footer.html' %}
-      {% include 'scripts.html' %}
+    {% block payment-gateway %}{% endblock payment-gateway %}
+    {% include 'footer.html' %}
+    {% include 'cookie.html' %}
+    {% include 'scripts.html' %}
+    {% block script %}{% endblock script%}
+</div>
+</body>
+</html>

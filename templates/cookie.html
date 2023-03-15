@@ -1,0 +1,15 @@
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/cookie.css' %}">
+{% endblock head%}
+<div id="cookie-banner" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p class="mb-0">Мы используем файлы cookie, чтобы улучшить ваш опыт на нашем сайте. Нажимая «Принять», вы
+            соглашаетесь на использование всех файлов cookie.</p>
+        <button id="accept-cookie" type="button" class="btn btn-success">Принять</button>
+        <button id="reject-cookie" type="button" class="btn btn-danger" data-dismiss="alert" aria-label="Close">
+            Отклонить
+        </button>
+    </div>
+    {% block script %}
+        <script src="{% static 'js/cookie.js' %}" type="text/javascript"></script>
+    {% endblock %}

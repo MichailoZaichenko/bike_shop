@@ -2,13 +2,15 @@ from store.forms import LoginForm, PasswordChangeForm, PasswordResetForm, SetPas
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-
+from django.conf.urls import handler404
 
 app_name = 'store'
 
 
 urlpatterns = [
-    path('', views.home, name="home"),
+    path('home', views.home, name="home"),
+    path('', views.main, name='main'),
+    path('contacts', views.contacts, name="contacts"),
     # URL for Cart and Checkout
     path('add-to-cart/', views.add_to_cart, name="add-to-cart"),
     path('remove-cart/<int:cart_id>/', views.remove_cart, name="remove-cart"),
@@ -45,3 +47,4 @@ urlpatterns = [
 
     
 ]
+handler404 = views.custom_handler_404

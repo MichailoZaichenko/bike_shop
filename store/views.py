@@ -21,6 +21,11 @@ def home(request):
     }
     return render(request, 'store/index.html', context)
 
+def main(request):
+    return render(request, 'store/main.html')
+
+def contacts(request):
+    return render(request, 'store/contacts.html')
 
 def detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
@@ -197,7 +202,8 @@ def orders(request):
     return render(request, 'store/orders.html', {'orders': all_orders})
 
 
-
+def custom_handler_404(request, exception):
+    return render(request, '404.html', status=404)
 
 
 def shop(request):

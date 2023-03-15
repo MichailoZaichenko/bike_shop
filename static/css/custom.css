@@ -1,0 +1,15 @@
+img {
+   width: 50%;
+   display: block;
+   margin: auto;
+}
+
+.aleart {
+    border: red 4px solid;
+    padding: 10px;
+}
+
+.p-border-yellow {
+  border: rgb(207, 178, 11) 4px solid;
+  padding: 10px;
+}

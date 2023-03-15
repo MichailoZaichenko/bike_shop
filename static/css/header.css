@@ -1,0 +1,32 @@
+.header_img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    max-height: 100px;
+    width: 100%;
+
+    background: url("../img/header.png")no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.header-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%; /* задаем высоту изображения в 100% от высоты контейнера */
+  width: auto; /* автоматический расчет ширины */
+  object-fit: cover; /* масштабируем изображение и сохраняем пропорции */
+  z-index: -1; /* задаем индекс z для помещения изображения под текстом */
+}
+
+.header-title {
+  position: relative;
+  z-index: 1; /* задаем индекс z для помещения заголовка над изображением */
+  margin: 0;
+  padding: 20px;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+  font-size: 2rem;
+}
