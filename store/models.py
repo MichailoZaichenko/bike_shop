@@ -61,8 +61,7 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.user)
-    
-    # Creating Model Property to calculate Quantity x Price
+
     @property
     def total_price(self):
         return self.quantity * self.product.price

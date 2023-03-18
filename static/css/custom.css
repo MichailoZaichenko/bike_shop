@@ -1,5 +1,5 @@
 img {
-   width: 65%;
+   width: 75%;
    display: block;
    margin: auto;
 }
@@ -12,4 +12,8 @@ img {
 .p-border-yellow {
   border: rgb(207, 178, 11) 4px solid;
   padding: 10px;
+}
+
+footer {
+    padding-top: 20px;
 }

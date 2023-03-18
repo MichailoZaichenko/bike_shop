@@ -20,10 +20,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <!-- Link--><a class="nav-link active" href="{% url 'store:home' %}">WellBike</a>
+                        <a class="nav-link active" href="{% url 'store:home' %}">WellBike</a>
                     </li>
                     <li class="nav-item">
-                        <!-- Link--><a class="nav-link active" href="{% url 'store:main' %}">Головна</a>
+                        <a class="nav-link active" href="{% url 'store:main' %}">Головна</a>
                     </li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
                                                      data-toggle="dropdown" aria-haspopup="true"
@@ -41,10 +41,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <!-- Link--><a class="nav-link" href="{% url 'store:home' %}">Аксесуари</a>
+                        <a class="nav-link" href="{% url 'store:home' %}">Аксесуари</a>
                     </li>
                     <li class="nav-item">
-                        <!-- Link--><a class="nav-link" href="{% url 'store:contacts' %}">Контакти</a>
+                        <a class="nav-link" href="{% url 'store:contacts' %}">Контакти</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -54,7 +54,6 @@
                                 class="text-gray">({{ cart_items.count }})</small></a></li>
                         <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small
                                 class="text-gray"> (0)</small></a></li>
-                        {% comment %} <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-user-alt mr-1 text-gray"></i>My Account</a></li> {% endcomment %}
 
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
                                                          data-toggle="dropdown" aria-haspopup="true"

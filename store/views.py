@@ -27,6 +27,9 @@ def main(request):
 def contacts(request):
     return render(request, 'store/contacts.html')
 
+def about(request):
+    return render(request, 'store/about.html')
+
 def detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
     related_products = Product.objects.exclude(id=product.id).filter(is_active=True, category=product.category)

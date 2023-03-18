@@ -11,6 +11,7 @@ urlpatterns = [
     path('home', views.home, name="home"),
     path('', views.main, name='main'),
     path('contacts', views.contacts, name="contacts"),
+    path('about', views.about, name="about"),
     # URL for Cart and Checkout
     path('add-to-cart/', views.add_to_cart, name="add-to-cart"),
     path('remove-cart/<int:cart_id>/', views.remove_cart, name="remove-cart"),

@@ -17,13 +17,13 @@ class RegistrationForm(UserCreationForm):
                                                                                   'placeholder': 'Пароль'}))
     password2 = forms.CharField(label="Підтвердити Пароль", widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Підтвердити Пароль'}))
-    email = forms.CharField(required=True,
+    email = forms.CharField(label="Електронна пошта", required=True,
                             widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Електронна пошта'}))
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-        labels = {'email': 'Електронна пошта'}
+        labels = {'username': "Ім'я"}
         widgets = {'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': "Ім'я"})}
 
 
