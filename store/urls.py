@@ -26,7 +26,7 @@ urlpatterns = [
     path('categories/', views.all_categories, name="all-categories"),
     path('<slug:slug>/', views.category_products, name="category-products"),
 
-    path('shop/', views.shop, name="shop"),
+    # path('shop/', views.shop, name="shop"),
 
     # URL for Authentication
     path('accounts/register/', views.RegistrationView.as_view(), name="register"),

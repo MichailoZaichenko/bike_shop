@@ -50,10 +50,12 @@ def category_products(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = Product.objects.filter(is_active=True, category=category)
     categories = Category.objects.filter(is_active=True)
+    count_of_products = Product.objects.all().count()
     context = {
         'category': category,
         'products': products,
         'categories': categories,
+        'count_of_products':count_of_products,
     }
     return render(request, 'store/category_products.html', context)
 
@@ -209,8 +211,8 @@ def custom_handler_404(request, exception):
     return render(request, '404.html', status=404)
 
 
-def shop(request):
-    return render(request, 'store/shop.html')
+# def shop(request):
+#     return render(request, 'store/shop.html')
 
 
 
