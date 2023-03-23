@@ -1,3 +1,7 @@
+/*Todo place for 1 big advertising(Реклама)*/
+body {
+    background-image: url("../img/img_5.png");
+}
 img {
    width: 75%;
    display: block;

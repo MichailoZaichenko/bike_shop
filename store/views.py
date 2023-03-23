@@ -53,8 +53,7 @@ def detail(request, slug):
 def all_categories(request):
     categories = Category.objects.filter(is_active=True)
     your_account = request.user
-    context = {'your_account': your_account, }
-    return render(request, 'store/categories.html', {'categories':categories}, context)
+    return render(request, 'store/categories.html', {'categories':categories, "your_account":request.user})
 
 
 def category_products(request, slug):
