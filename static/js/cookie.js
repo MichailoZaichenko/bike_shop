@@ -31,6 +31,10 @@ function checkAcceptedCookie() {
   return acceptedCookie == "true";
 }
 
+if (!localStorage.getItem("cookiesAccepted")) {
+    cookieBanner.style.display = "block";
+  }
+
 // Отображение формы куки через 5 секунд
 setTimeout(function() {
   if (!checkAcceptedCookie()) {

@@ -5,6 +5,7 @@
     min-height: 100vh;
     max-height: 100px;
     width: 100%;
+    height: 70%;
 
     background: url("../img/header2.png")no-repeat;
     background-position: center;

@@ -1,0 +1,44 @@
+/* Change background color and text color of footer */
+footer {
+    padding-top: 20px;
+      background-color: #222;
+  color: #fff;
+}
+
+/* Style the headings in the footer */
+footer h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Style the contact information in the footer */
+footer p {
+  margin-bottom: 0.5rem;
+}
+
+/* Style the credits section */
+.credits {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}
+
+/* Align the "website made by" text to the right */
+.credits .text-lg-right {
+  text-align: right;
+}
+
+/* Style the "website made by" link */
+.credits a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Add some spacing between the links in the "Посилання" section */
+footer ul li {
+  margin-bottom: 0.5rem;
+}
+
+/* Add a hover effect to the links in the "Посилання" section */
+footer ul li a:hover {
+  text-decoration: underline;
+}

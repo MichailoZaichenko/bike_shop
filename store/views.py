@@ -15,35 +15,46 @@ from django.utils.decorators import method_decorator # for Class Based Views
 def home(request):
     categories = Category.objects.filter(is_active=True, is_featured=True)[:3]
     products = Product.objects.filter(is_active=True, is_featured=True)[:8]
+    your_account = request.user
     context = {
         'categories': categories,
         'products': products,
+        'your_account':your_account,
     }
     return render(request, 'store/index.html', context)
 
 def main(request):
-    return render(request, 'store/main.html')
+    your_account = request.user
+    context = {'your_account':your_account,}
+    return render(request, 'store/main.html', context)
 
 def contacts(request):
-    return render(request, 'store/contacts.html')
+    your_account = request.user
+    context = {'your_account':your_account,}
+    return render(request, 'store/contacts.html', context)
 
 def about(request):
-    return render(request, 'store/about.html')
+    your_account = request.user
+    context = {'your_account':your_account,}
+    return render(request, 'store/about.html', context)
 
 def detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
+    your_account = request.user
     related_products = Product.objects.exclude(id=product.id).filter(is_active=True, category=product.category)
     context = {
         'product': product,
         'related_products': related_products,
-
+        'your_account': your_account,
     }
     return render(request, 'store/detail.html', context)
 
 
 def all_categories(request):
     categories = Category.objects.filter(is_active=True)
-    return render(request, 'store/categories.html', {'categories':categories})
+    your_account = request.user
+    context = {'your_account': your_account, }
+    return render(request, 'store/categories.html', {'categories':categories}, context)
 
 
 def category_products(request, slug):
@@ -51,11 +62,13 @@ def category_products(request, slug):
     products = Product.objects.filter(is_active=True, category=category)
     categories = Category.objects.filter(is_active=True)
     count_of_products = Product.objects.all().count()
+    your_account = request.user
     context = {
         'category': category,
         'products': products,
         'categories': categories,
         'count_of_products':count_of_products,
+        'your_account': your_account,
     }
     return render(request, 'store/category_products.html', context)
 
@@ -79,7 +92,8 @@ class RegistrationView(View):
 def profile(request):
     addresses = Address.objects.filter(user=request.user)
     orders = Order.objects.filter(user=request.user)
-    return render(request, 'account/profile.html', {'addresses':addresses, 'orders':orders})
+    your_account = request.user
+    return render(request, 'account/profile.html', {'addresses':addresses, 'orders':orders, 'your_account': your_account,})
 
 
 @method_decorator(login_required, name='dispatch')
@@ -113,7 +127,7 @@ def add_to_cart(request):
     user = request.user
     product_id = request.GET.get('prod_id')
     product = get_object_or_404(Product, id=product_id)
-
+    your_account = request.user
     # Check whether the Product is alread in Cart or Not
     item_already_in_cart = Cart.objects.filter(product=product_id, user=user)
     if item_already_in_cart:
@@ -123,11 +137,12 @@ def add_to_cart(request):
     else:
         Cart(user=user, product=product).save()
     
-    return redirect('store:cart')
+    return redirect('store:cart', your_account)
 
 
 @login_required
 def cart(request):
+    your_account = request.user
     user = request.user
     cart_products = Cart.objects.filter(user=user)
 
@@ -150,6 +165,7 @@ def cart(request):
         'shipping_amount': shipping_amount,
         'total_amount': amount + shipping_amount,
         'addresses': addresses,
+        'your_account': your_account,
     }
     return render(request, 'store/cart.html', context)
 
@@ -204,7 +220,8 @@ def checkout(request):
 @login_required
 def orders(request):
     all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
-    return render(request, 'store/orders.html', {'orders': all_orders})
+    your_account = request.user
+    return render(request, 'store/orders.html', {'orders': all_orders, 'your_account': your_account,})
 
 
 def custom_handler_404(request, exception):
