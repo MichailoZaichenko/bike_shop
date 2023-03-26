@@ -10,54 +10,55 @@
 
                 <h1 class="mb-5">Створити свій обліковий запис</h1>
 
-
-{#                <div class="card mb-4" id="forms">#}
-{#                    <div class="card-header">#}
-{#                        <small>#}
-{#                            За допомогою цього облікового запису ви можете заощаджувати час під час оформлення#}
-{#                            замовлення,#}
-{#                            отримувати доступ до свого кошика з будь-якого пристрою та переглядати історію замовлень.#}
-{#                        </small>#}
-{#                    </div>#}
-{#                </div>#}
-                    <div class="card-body">
-
-                        {% include 'partials/_messages.html' %}
-
-                        <form method="post" action="">
-                            <fieldset>
-                                {% csrf_token %}
-                                <div class="form-box">
-                                    <div class="form-value">
-                                        <h2>Створити акаунт</h2>
-                                        {% for fm in form %}
-                                            <div class="form-group">
-                                                {{ fm.label_tag }}
-                                                {{ fm }}
-                                                <small class="text-danger">{{ fm.errors|striptags }}</small>
-                                            </div>
-                                        {% endfor %}
-                                        <button class="btn btn-primary" type="submit">Створити акаунт</button>
-                                        <div class="register">
-
-                                            Вже є аккаунт? <a href="{% url 'store:login' %}">Увійти </a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <div class="exeption">
-                                {% if form.non_field_errors %}
-                                    {% for error in form.non_field_errors %}
-                                        <p class="alert alert-danger alert-dismissible fade show" role="alert" my-3>
-                                            {{ error }}
-                                        </p>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                        </form>
+            <div class="card mb-2" id="forms">
+                <div class="card mb-4" id="forms">
+                    <div class="card-header">
+                        <h6>
+                            За допомогою цього облікового запису ви можете заощаджувати час під час оформлення
+                            замовлення,
+                            отримувати доступ до свого кошика з будь-якого пристрою та переглядати історію замовлень.
+                        </h6>
                     </div>
                 </div>
+                <div class="card-body">
+
+                    {% include 'partials/_messages.html' %}
+
+                    <form method="post" action="">
+                        <fieldset>
+                            {% csrf_token %}
+                            <div class="form-box">
+                                <div class="form-value">
+                                    <h2>Створити акаунт</h2>
+                                    {% for fm in form %}
+                                        <div class="form-group">
+                                            {{ fm.label_tag }}
+                                            {{ fm }}
+                                            <small class="text-danger">{{ fm.errors|striptags }}</small>
+                                        </div>
+                                    {% endfor %}
+                                    <button class="btn btn-primary" type="submit">Створити акаунт</button>
+                                    <div class="register">
+
+                                        Вже є аккаунт? <a href="{% url 'store:login' %}">Увійти </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="exeption">
+                            {% if form.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="alert alert-danger alert-dismissible fade show" role="alert" my-3>
+                                        {{ error }}
+                                    </p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 {% endblock content %}

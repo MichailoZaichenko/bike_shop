@@ -2,6 +2,7 @@
 
 {% block head %}
     <link href="{% static 'css/header.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/button_back_col.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
 
 {#<header class="header_img">#}
@@ -27,7 +28,7 @@
                     </li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                     aria-expanded="false">Категорії Велосипедів</a>
+                                                     aria-expanded="false">Крамниця</a>
                         <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
                             {% if categories_menu %}
                                 {% for cat_menu in categories_menu %}
@@ -43,14 +44,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'store:contacts' %}">Контакти</a>
                     </li>
+                    <li>
+                        <div id="toggle-theme" class="btn btn-primary">🌣</div>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'store:cart' %}"> <i
                                 class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small
                                 class="text-gray">({{ cart_items.count }})</small></a></li>
-                        <li class="nav-item"><a class="nav-link" href="#"> <i class="far fa-heart mr-1"></i><small
-                                class="text-gray"> (0)</small></a></li>
 
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
                                                          data-toggle="dropdown" aria-haspopup="true"
@@ -77,10 +79,10 @@
                         </li>
                     {% endif %}
                 </ul>
-{#            TODO add transtate en/uk#}
-{#            TODO add booton canging color of site#}
             </div>
         </nav>
     </div>
 </header>
-
+{% block script %}
+    <script src="{% static 'js/button_back_col.js' %}" type="text/javascript"></script>
+{% endblock script%}

@@ -17,3 +17,8 @@ img {
   border: rgb(207, 178, 11) 4px solid;
   padding: 10px;
 }
+
+table {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
