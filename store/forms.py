@@ -37,6 +37,7 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ['locality', 'city', 'state']
+        labels = {'locality':"Популярне місце", 'city':"Місто", 'state':"Штат"}
         widgets = {'locality': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Популярне місце, '
                                                                                               'як ресторан, релігійний '
                                                                                               'сайт тощо.'}),

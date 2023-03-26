@@ -1,52 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/log_in.css' %}">
+{% endblock head %}
+{% block content %}
+    <div class="all_log_in">
+        <div class="container py-5">
+            <div class="col-md-8 offset-2">
 
-    {% block content %}
+                <h1 class="mb-5">Додати нову адресу</h1>
 
-      <div class="container py-5">
-        <div class="col-md-8 offset-2">
 
-        <h1 class="mb-5">Додати нову адресу</h1>
-        
-        
-        <div class="card mb-4" id="forms">
-          <div class="card-header">
-            <small>
-            За допомогою цього облікового запису ви можете заощаджувати час під час оформлення замовлення, отримувати доступ до свого кошика з будь-якого пристрою та переглядати історію замовлень.
-            </small>
-          </div>
-          <div class="card-body">
+                <div class="card-body">
 
-            {% include 'partials/_messages.html' %}
+                    {% include 'partials/_messages.html' %}
 
-            <form method="post" action="">
-              <fieldset>
-                {% csrf_token %}
+                    <form method="post" action="">
+                        <fieldset>
+                            {% csrf_token %}
+                            <div class="form-box">
+                                <div class="form-value">
+                                    <div class="card-header">
+                                        <small>
+                                            За допомогою цього облікового запису ви можете заощаджувати час під час
+                                            оформлення
+                                            замовлення, отримувати доступ до свого кошика з будь-якого пристрою та
+                                            переглядати історію
+                                            замовлень.
+                                        </small>
+                                    </div>
+                                    <h2 class="mb-5">Додати нову адресу</h2>
+                                    {% for fm in form %}
+                                        <div class="form-group">
+                                            {{ fm.label_tag }}
+                                            {{ fm }}
+                                            <small class="text-danger">{{ fm.errors|striptags }}</small>
+                                        </div>
+                                    {% endfor %}
+                                    <button class="btn btn-primary" type="submit">Підтвердити</button>
+                                </div>
+                            </div>
+                        </fieldset>
 
-                {% for fm in form %}
-                    <div class="form-group">
-                        {{fm.label_tag}}
-                        {{fm}}
-                        <small class="text-danger">{{fm.errors|striptags}}</small>
-                    </div>
-                {% endfor %}
-                <button class="btn btn-primary" type="submit">Підтвердити</button>
-              </fieldset>
+                        {% if form.non_field_errors %}
+                            {% for error in non_field_errors %}
+                                <p class="alert alert-danger my-3">
+                                    {{ error }}
+                                </p>
+                            {% endfor %}
+                        {% endif %}
 
-              {% if form.non_field_errors %}
-                {% for error in non_field_errors %}
-                    <p class="alert alert-danger my-3">
-                        {{error}}
-                    </p>
-                {% endfor %}
-              {% endif %}
+                    </form>
 
-            </form>
 
-            
-          </div>
+                </div>
+
+
+            </div>
         </div>
-
-        </div>       
-      </div>
+    </div>
 {% endblock content %}

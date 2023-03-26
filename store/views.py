@@ -7,10 +7,7 @@ from django.contrib import messages
 from django.views import View
 import decimal
 from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator # for Class Based Views
-
-
-# Create your views here.
+from django.utils.decorators import method_decorator
 
 def home(request):
     categories = Category.objects.filter(is_active=True, is_featured=True)[:3]
@@ -72,7 +69,7 @@ def category_products(request, slug):
     return render(request, 'store/category_products.html', context)
 
 
-# Authentication Starts Here
+# Registration
 
 class RegistrationView(View):
     def get(self, request):
@@ -225,10 +222,6 @@ def orders(request):
 
 def custom_handler_404(request, exception):
     return render(request, '404.html', status=404)
-
-
-# def shop(request):
-#     return render(request, 'store/shop.html')
 
 
 
