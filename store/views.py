@@ -1,8 +1,10 @@
 import django
 from django.contrib.auth.models import User
-from store.models import Address, Cart, Category, Order, Product
+from store.models import Address, Cart, Category, Order, Product\
+    # , FeedBack
 from django.shortcuts import redirect, render, get_object_or_404
-from .forms import RegistrationForm, AddressForm
+from .forms import RegistrationForm, AddressForm\
+    # , FeedbackForm
 from django.contrib import messages
 from django.views import View
 import decimal
@@ -110,6 +112,24 @@ class AddressView(View):
             messages.success(request, "New Address Added Successfully.")
         return redirect('store:profile')
 
+# @method_decorator(login_required, name='dispatch')
+# def FeedbackView(request):
+#     if request.method == 'GET':
+#         form = FeedbackForm()
+#         return render(request, 'store/about.html', {'form': form})
+#
+#     if request.method == 'POST':
+#         form = FeedbackForm(request.POST)
+#         if form.is_valid():
+#             user = request.user
+#             email = request.email
+#             feedback = form.feedback
+#             form = FeedbackForm(request.POST)
+#             reg = FeedBack(user = user, email=email, feedback= feedback)
+#             reg.save()
+#             form.save()
+#             messages.success(request, "Congratulations! Registration Successful!")
+#         return render(request, 'store/about.html', {'form': form})
 
 @login_required
 def remove_address(request, id):

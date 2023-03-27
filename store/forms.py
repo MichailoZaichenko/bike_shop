@@ -44,6 +44,12 @@ class AddressForm(forms.ModelForm):
                    'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Місто'}),
                    'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Штат або столиця'})}
 
+# class FeedbackForm(forms.ModelForm):
+#     class Meta:
+#         fields = ['feedback']
+#         labels = {'feedback':"Повідомлення"}
+#         widgets = {'feedback':forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Введыть ваше '
+#                                                                                                  'повыдомлення'})}
 
 class PasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label=_("Старий пароль"), strip=False, widget=forms.PasswordInput(

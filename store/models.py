@@ -1,7 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Todo add more products
-# Create your models here.
+#Todo Create your models here.
+
+# class FeedBack(models.Model):
+#     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
+#     email = models.CharField(max_length=50, verbose_name="Email")
+#     feedback = models.TextField(max_length=300, verbose_name="Feedback")
+#
+#     def __str__(self):
+#         return self.locality
+
 class Address(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     locality = models.CharField(max_length=150, verbose_name="Nearest Location")

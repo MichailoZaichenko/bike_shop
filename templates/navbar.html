@@ -44,6 +44,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'store:contacts' %}">Контакти</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'store:about' %}">Про нас</a>
+                    </li>
                     <li>
                         <div id="toggle-theme" class="btn btn-primary">🌣</div>
                     </li>
@@ -51,7 +54,7 @@
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'store:cart' %}"> <i
-                                class="fas fa-dolly-flatbed mr-1 text-gray"></i>Cart<small
+                                class="fas fa-dolly-flatbed mr-1 text-gray"></i>Кошик<small
                                 class="text-gray">({{ cart_items.count }})</small></a></li>
 
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
