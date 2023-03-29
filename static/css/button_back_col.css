@@ -8,3 +8,31 @@
   background-color: #212529;
   color: #f8f9fa;
 }
+
+.light-theme .table {
+color: #212529;
+}
+
+.dark-theme .table {
+color: #f8f9fa;
+}
+
+.navbar-light {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.navbar-dark {
+  background-color: #212529;
+  color: #f8f9fa;
+}
+
+.header-light {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.header-dark {
+  background-color: #212529;
+  color: #f8f9fa;
+}

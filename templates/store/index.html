@@ -36,13 +36,13 @@
         <section class="pt-5">
             <header class="text-center">
                 <p class="small text-muted small text-uppercase mb-1">Наша колекція</p>
-                <h2 class="h5 text-uppercase mb-4">Продивися наші намовірні категорії</h2>
+                <h2 class="h5 text-uppercase mb-4">Продивися наші неймовірні категорії</h2>
             </header>
             <div class="row">
                 {% if categories %}
                     {% for category in categories %}
 
-                        <div class="col-md-4 mb-4 mb-md-0">
+                        <div class="col-md-4 mb-4 mb-md-5">
                             <a class="category-item" href="{% url 'store:category-products' category.slug %}">
                                 {% if category.category_image %}
                                     <img class="img-fluid" src="{{ category.category_image.url }}"
@@ -72,7 +72,7 @@
                     {% for product in products %}
 
                         <!-- PRODUCT-->
-                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                        <div class="col-xl-3 col-lg-4 col-sm-6" style="height: 300px">
                             <div class="product text-center">
                                 <div class="position-relative mb-3">
 
@@ -80,10 +80,11 @@
 
                                     <a class="d-block" href="{% url 'store:product-detail' product.slug %}">
                                         {% if product.product_image %}
-                                            <img class="img-fluid w-100" src="{{ product.product_image.url }}"
+                                            <img class="img-fluid w-100" style="max-height: 170px" src=
+                                                    "{{ product.product_image.url }}"
                                                  alt="{{ product.title }}">
                                         {% else %}
-                                            <img class="img-fluid w-100" src="{% static 'img/product-1.jpg' %}"
+                                            <img class="img-fluid w-100" style="max-height: 170px" src="{% static 'img/not_img.png' %}"
                                                  alt="{{ product.title }}">
                                         {% endif %}
                                     </a>

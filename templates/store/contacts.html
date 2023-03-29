@@ -21,14 +21,15 @@
             </div>
             <div class="col-md-6">
                 <form>
-                    <h3>Напишіть нам</h3>
                     {% csrf_token %}
-                    <div class="form-group">
-                        {% for fm in form %}
+                    <h3>Напишіть нам</h3>
+                    {% for fm in form %}
+                        <div class="form-group">
                             {{ fm.label_tag }}
                             {{ fm }}
-                            </div>
-                        {% endfor %}
+                        <small class="text-danger">{{ fm.errors|striptags }}</small>
+                        </div>
+                    {% endfor %}
                     <button type="submit" class="btn btn-primary">Надіслати</button>
                 </form>
             </div>

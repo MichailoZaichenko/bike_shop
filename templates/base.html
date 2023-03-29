@@ -44,7 +44,11 @@
 
     {% block payment-gateway %}{% endblock payment-gateway %}
     {% include 'footer.html' %}
+{#    {% if acceptedCookie == True %}#}
     {% include 'cookie.html' %}
+{#    {% else %}#}
+{#    <br>#}
+{#    {% endif %}#}
     {% include 'scripts.html' %}
 {#    Todo place for custom scripts#}
     {% block script %}{% endblock script%}

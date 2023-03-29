@@ -43,36 +43,36 @@
                                         <td>{{ order.ordered_date|naturaltime }}</td>
                                         <td>
 
-                                            {% if order.status == 'Pending' %}
+                                            {% if order.status == 'Очікує на розгляд' %}
 
                                             {% endif %}
 
-                                            {% if order.status == 'Accepted' %}
+                                            {% if order.status == 'Прийнят' %}
                                                 <div class="bg-light border border-primary">
                                                     <div class="p-3 bg-primary" style="width:0;"></div>
                                                 </div>
                                             {% endif %}
 
-                                            {% if order.status == 'Packed' %}
+                                            {% if order.status == 'Упакований' %}
                                                 <div class="bg-light border border-primary">
                                                     <div class="p-3 bg-primary" style="width:40%;"></div>
                                                 </div>
                                             {% endif %}
 
 
-                                            {% if order.status == 'On The Way' %}
+                                            {% if order.status == 'На шляху' %}
                                                 <div class="bg-light border border-primary">
                                                     <div class="p-3 bg-primary" style="width:70%;"></div>
                                                 </div>
                                             {% endif %}
 
-                                            {% if order.status == 'Delivered' %}
+                                            {% if order.status == 'Доставлено' %}
                                                 <div class="bg-light border border-primary">
                                                     <div class="p-3 bg-primary" style="width:100%;"></div>
                                                 </div>
                                             {% endif %}
 
-                                            {% if order.status == 'Cancelled' %}
+                                            {% if order.status == 'Скасовано' %}
                                                 <div class="bg-light border border-danger">
                                                     <div class="p-3 bg-danger" style="width:100%;"></div>
                                                 </div>

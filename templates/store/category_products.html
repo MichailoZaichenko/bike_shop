@@ -131,20 +131,21 @@
                                 {% for product in products %}
 
                                     <!-- PRODUCT-->
-                                    <div class="col-lg-4 col-sm-6">
+                                    <div class="col-lg-4 col-sm-6" style="height: 300px">
                                         <div class="product text-center">
                                             <div class="mb-3 position-relative">
 
                                                 <div class="badge text-white badge-"></div>
 
-                                                <a class="d-block" href="{% url 'store:product-detail' product.slug %}">
+                                                <a class="d-block" style="max-height: 170px" href=
+                                                        "{% url 'store:product-detail' product.slug %}">
                                                     {% if product.product_image %}
                                                         <img class="img-fluid w-100"
                                                              src="{{ product.product_image.url }}"
                                                              alt="{{ product.title }}">
                                                     {% else %}
-                                                        <img class="img-fluid w-100"
-                                                             src="{% static 'img/product-1.jpg' %}"
+                                                        <img class="img-fluid w-100" style="max-height: 170px"
+                                                             src="{% static 'img/not_img.png' %}"
                                                              alt="{{ product.title }}">
                                                     {% endif %}
                                                 </a>

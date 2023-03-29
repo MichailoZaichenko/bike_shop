@@ -2,13 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 #Todo Create your models here.
 
-# class FeedBack(models.Model):
-#     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
-#     email = models.CharField(max_length=50, verbose_name="Email")
-#     feedback = models.TextField(max_length=300, verbose_name="Feedback")
-#
-#     def __str__(self):
-#         return self.locality
+class FeedBack(models.Model):
+    user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
+    email = models.CharField(max_length=50, verbose_name="Email")
+    feedback = models.TextField(max_length=300, verbose_name="Feedback")
+
+    def __str__(self):
+        return self.locality
 
 class Address(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
@@ -76,12 +76,12 @@ class Cart(models.Model):
 
 
 STATUS_CHOICES = (
-    ('Pending', 'Pending'),
-    ('Accepted', 'Accepted'),
-    ('Packed', 'Packed'),
-    ('On The Way', 'On The Way'),
-    ('Delivered', 'Delivered'),
-    ('Cancelled', 'Cancelled')
+    ('Очікує на розгляд', 'Очікує на розгляд'),
+    ('Прийнят', 'Прийнят'),
+    ('Упакований', 'Упакований'),
+    ('На шляху', 'На шляху'),
+    ('Доставлено', 'Доставлено'),
+    ('Скасовано', 'Скасовано')
 )
 
 class Order(models.Model):
@@ -93,5 +93,5 @@ class Order(models.Model):
     status = models.CharField(
         choices=STATUS_CHOICES,
         max_length=50,
-        default="Pending"
+        default="Очікує на розгляд"
         )

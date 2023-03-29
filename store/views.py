@@ -1,10 +1,8 @@
 import django
 from django.contrib.auth.models import User
-from store.models import Address, Cart, Category, Order, Product\
-    # , FeedBack
+from store.models import Address, Cart, Category, Order, Product, FeedBack
 from django.shortcuts import redirect, render, get_object_or_404
-from .forms import RegistrationForm, AddressForm\
-    # , FeedbackForm
+from .forms import RegistrationForm, AddressForm, FeedbackForm
 from django.contrib import messages
 from django.views import View
 import decimal
@@ -12,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 def home(request):
-    categories = Category.objects.filter(is_active=True, is_featured=True)[:3]
-    products = Product.objects.filter(is_active=True, is_featured=True)[:8]
+    categories = Category.objects.filter(is_active=True, is_featured=True)[:6]
+    products = Product.objects.filter(is_active=True, is_featured=True)[:12]
     your_account = request.user
     context = {
         'categories': categories,
@@ -39,12 +37,12 @@ def about(request):
 
 def detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
-    your_account = request.user
+    # your_account = request.user
     related_products = Product.objects.exclude(id=product.id).filter(is_active=True, category=product.category)
     context = {
         'product': product,
         'related_products': related_products,
-        'your_account': your_account,
+        # 'your_account': your_account,
     }
     return render(request, 'store/detail.html', context)
 
@@ -81,7 +79,7 @@ class RegistrationView(View):
     def post(self, request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            messages.success(request, "Congratulations! Registration Successful!")
+            messages.success(request, "Щиро вітаю! Реєстрація успішна!")
             form.save()
         return render(request, 'account/register.html', {'form': form})
         
@@ -97,8 +95,9 @@ def profile(request):
 @method_decorator(login_required, name='dispatch')
 class AddressView(View):
     def get(self, request):
+        your_account = request.user
         form = AddressForm()
-        return render(request, 'account/add_address.html', {'form': form})
+        return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account,})
 
     def post(self, request):
         form = AddressForm(request.POST)
@@ -109,33 +108,33 @@ class AddressView(View):
             state = form.cleaned_data['state']
             reg = Address(user=user, locality=locality, city=city, state=state)
             reg.save()
-            messages.success(request, "New Address Added Successfully.")
+            messages.success(request, "Новый адрес успешно добавлен.")
         return redirect('store:profile')
 
-# @method_decorator(login_required, name='dispatch')
-# def FeedbackView(request):
-#     if request.method == 'GET':
-#         form = FeedbackForm()
-#         return render(request, 'store/about.html', {'form': form})
-#
-#     if request.method == 'POST':
-#         form = FeedbackForm(request.POST)
-#         if form.is_valid():
-#             user = request.user
-#             email = request.email
-#             feedback = form.feedback
-#             form = FeedbackForm(request.POST)
-#             reg = FeedBack(user = user, email=email, feedback= feedback)
-#             reg.save()
-#             form.save()
-#             messages.success(request, "Congratulations! Registration Successful!")
-#         return render(request, 'store/about.html', {'form': form})
+@method_decorator(login_required, name='dispatch')
+class FeedbackView(View):
+
+    def get(self, request):
+        your_account = request.user
+        form = FeedbackForm()
+        return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account,})
+
+    def post(self, request):
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            user = request.user
+            email = form.cleaned_data['email']
+            feedback = form.cleaned_data['feedback']
+            reg = FeedBack(user=user, email=email, feedback=feedback)
+            reg.save()
+            messages.success(request, "Вітаємо відгук надіслано успішно")
+        return redirect('store:profile')
 
 @login_required
 def remove_address(request, id):
     a = get_object_or_404(Address, user=request.user, id=id)
     a.delete()
-    messages.success(request, "Address removed.")
+    messages.success(request, "Адрес прибран!")
     return redirect('store:profile')
 
 @login_required
@@ -153,7 +152,7 @@ def add_to_cart(request):
     else:
         Cart(user=user, product=product).save()
     
-    return redirect('store:cart', your_account)
+    return redirect('store:cart')
 
 
 @login_required
@@ -191,7 +190,7 @@ def remove_cart(request, cart_id):
     if request.method == 'GET':
         c = get_object_or_404(Cart, id=cart_id)
         c.delete()
-        messages.success(request, "Product removed from Cart.")
+        messages.success(request, "Товар видалено з кошика.")
     return redirect('store:cart')
 
 
@@ -220,8 +219,9 @@ def minus_cart(request, cart_id):
 @login_required
 def checkout(request):
     user = request.user
+    your_account = request.user
     address_id = request.GET.get('address')
-    
+
     address = get_object_or_404(Address, id=address_id)
     # Get all the products of User in Cart
     cart = Cart.objects.filter(user=user)
@@ -230,7 +230,26 @@ def checkout(request):
         Order(user=user, address=address, product=c.product, quantity=c.quantity).save()
         # And Deleting from Cart
         c.delete()
-    return redirect('store:orders')
+    amount = decimal.Decimal(0)
+    shipping_amount = decimal.Decimal(10)
+    # using list comprehension to calculate total amount based on quantity and shipping
+    cp = [p for p in Cart.objects.all() if p.user == user]
+    if cp:
+        for p in cp:
+            temp_amount = (p.quantity * p.product.price)
+            amount += temp_amount
+
+    # Customer Addresses
+    addresses = Address.objects.filter(user=user)
+
+    context = {
+        'amount': amount,
+        'shipping_amount': shipping_amount,
+        'total_amount': amount + shipping_amount,
+        'addresses': addresses,
+        'your_account': your_account,
+    }
+    return render(request, 'store/checkout.html', context)
 
 
 @login_required

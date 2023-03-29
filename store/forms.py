@@ -1,10 +1,9 @@
 from django.contrib.auth import password_validation
-from store.models import Address
+from store.models import Address, FeedBack
 from django import forms
 import django
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, \
-    PasswordResetForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField, PasswordChangeForm, PasswordResetForm, SetPasswordForm
 from django.db import models
 from django.db.models import fields
 from django.forms import widgets
@@ -44,12 +43,14 @@ class AddressForm(forms.ModelForm):
                    'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Місто'}),
                    'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Штат або столиця'})}
 
-# class FeedbackForm(forms.ModelForm):
-#     class Meta:
-#         fields = ['feedback']
-#         labels = {'feedback':"Повідомлення"}
-#         widgets = {'feedback':forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Введыть ваше '
-#                                                                                                  'повыдомлення'})}
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = FeedBack
+        fields = ['email','feedback']
+        labels = {'email':"Пошта",'feedback':"Повідомлення"}
+        widgets = {'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Пошта'}),
+                   'feedback': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Введіть ваше '
+                                                                                                 'повідомлення'})}
 
 class PasswordChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label=_("Старий пароль"), strip=False, widget=forms.PasswordInput(
