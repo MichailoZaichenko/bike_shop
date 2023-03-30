@@ -10,6 +10,14 @@ class FeedBack(models.Model):
     def __str__(self):
         return self.locality
 
+class PayingWay(models.Model):
+    user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
+    card_number = models.CharField(max_length=20, verbose_name='card_number')
+    CVV = models.CharField(max_length=3, verbose_name='CVV')
+
+    def __str__(self):
+        return self.locality
+
 class Address(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     locality = models.CharField(max_length=150, verbose_name="Nearest Location")

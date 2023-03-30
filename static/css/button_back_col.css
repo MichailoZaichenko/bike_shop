@@ -1,12 +1,12 @@
 *.light-theme {
-  background-color: #f8f9fa;
+  background-color: #FFFFFF;
   color: #212529;
 }
 
 /* Стили для тёмной темы */
 *.dark-theme {
   background-color: #212529;
-  color: #f8f9fa;
+  color: #FFFFFF;
 }
 
 .light-theme .table {
@@ -14,7 +14,7 @@ color: #212529;
 }
 
 .dark-theme .table {
-color: #f8f9fa;
+color: #FFFFFF;
 }
 
 .navbar-light {
@@ -24,7 +24,7 @@ color: #f8f9fa;
 
 .navbar-dark {
   background-color: #212529;
-  color: #f8f9fa;
+  color: #FFFFFF;
 }
 
 .header-light {
@@ -34,5 +34,5 @@ color: #f8f9fa;
 
 .header-dark {
   background-color: #212529;
-  color: #f8f9fa;
+  color: #FFFFFF;
 }

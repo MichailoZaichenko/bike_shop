@@ -1,8 +1,8 @@
 import django
 from django.contrib.auth.models import User
-from store.models import Address, Cart, Category, Order, Product, FeedBack
+from store.models import Address, Cart, Category, Order, Product, FeedBack, PayingWay
 from django.shortcuts import redirect, render, get_object_or_404
-from .forms import RegistrationForm, AddressForm, FeedbackForm
+from .forms import RegistrationForm, AddressForm, FeedbackForm, PayingWayForm
 from django.contrib import messages
 from django.views import View
 import decimal
@@ -87,29 +87,11 @@ class RegistrationView(View):
 @login_required
 def profile(request):
     addresses = Address.objects.filter(user=request.user)
+    paying_ways = PayingWay.objects.filter(user=request.user)
     orders = Order.objects.filter(user=request.user)
     your_account = request.user
-    return render(request, 'account/profile.html', {'addresses':addresses, 'orders':orders, 'your_account': your_account,})
-
-
-@method_decorator(login_required, name='dispatch')
-class AddressView(View):
-    def get(self, request):
-        your_account = request.user
-        form = AddressForm()
-        return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account,})
-
-    def post(self, request):
-        form = AddressForm(request.POST)
-        if form.is_valid():
-            user=request.user
-            locality = form.cleaned_data['locality']
-            city = form.cleaned_data['city']
-            state = form.cleaned_data['state']
-            reg = Address(user=user, locality=locality, city=city, state=state)
-            reg.save()
-            messages.success(request, "Новый адрес успешно добавлен.")
-        return redirect('store:profile')
+    return render(request, 'account/profile.html', {'addresses':addresses, 'orders':orders, 'your_account':
+        your_account,'paying_ways':paying_ways})
 
 @method_decorator(login_required, name='dispatch')
 class FeedbackView(View):
@@ -128,6 +110,50 @@ class FeedbackView(View):
             reg = FeedBack(user=user, email=email, feedback=feedback)
             reg.save()
             messages.success(request, "Вітаємо відгук надіслано успішно")
+        return redirect('store:profile')
+
+@method_decorator(login_required, name='dispatch')
+class PayingWayView(View):
+    def get(self, request):
+        your_account = request.user
+        form = PayingWayForm()
+        return render(request, 'account/add_paying_way.html', {'form': form, 'your_account': your_account,})
+
+    def post(self, request):
+        form = PayingWayForm(request.POST)
+        if form.is_valid():
+            user=request.user
+            card_number = form.cleaned_data['card_number']
+            CVV = form.cleaned_data['CVV']
+            reg = PayingWay(user=user, card_number=card_number, CVV=CVV)
+            reg.save()
+            messages.success(request, "Нова картка додана успішно")
+        return redirect('store:profile')
+
+@login_required
+def remove_payingway(request, id):
+    a = get_object_or_404(PayingWay, user=request.user, id=id)
+    a.delete()
+    messages.success(request, "Картка прибрана!")
+    return redirect('store:profile')
+
+@method_decorator(login_required, name='dispatch')
+class AddressView(View):
+    def get(self, request):
+        your_account = request.user
+        form = AddressForm()
+        return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account,})
+
+    def post(self, request):
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            user=request.user
+            locality = form.cleaned_data['locality']
+            city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
+            reg = Address(user=user, locality=locality, city=city, state=state)
+            reg.save()
+            messages.success(request, "Нову адресу успішно додано")
         return redirect('store:profile')
 
 @login_required
@@ -154,7 +180,6 @@ def add_to_cart(request):
     
     return redirect('store:cart')
 
-
 @login_required
 def cart(request):
     your_account = request.user
@@ -171,8 +196,8 @@ def cart(request):
             temp_amount = (p.quantity * p.product.price)
             amount += temp_amount
 
-    # Customer Addresses
     addresses = Address.objects.filter(user=user)
+    paying_ways = PayingWay.objects.filter(user=user)
 
     context = {
         'cart_products': cart_products,
@@ -180,6 +205,7 @@ def cart(request):
         'shipping_amount': shipping_amount,
         'total_amount': amount + shipping_amount,
         'addresses': addresses,
+        'paying_ways': paying_ways,
         'your_account': your_account,
     }
     return render(request, 'store/cart.html', context)
@@ -220,6 +246,9 @@ def minus_cart(request, cart_id):
 def checkout(request):
     user = request.user
     your_account = request.user
+    email = request.user.email
+    addresses = Address.objects.filter(user=request.user)
+    paying_ways = PayingWay.objects.filter(user=user)
     address_id = request.GET.get('address')
 
     address = get_object_or_404(Address, id=address_id)
@@ -239,24 +268,24 @@ def checkout(request):
             temp_amount = (p.quantity * p.product.price)
             amount += temp_amount
 
-    # Customer Addresses
-    addresses = Address.objects.filter(user=user)
-
     context = {
         'amount': amount,
         'shipping_amount': shipping_amount,
         'total_amount': amount + shipping_amount,
         'addresses': addresses,
         'your_account': your_account,
+        'email':email,
+        'addresses':addresses,
+        'paying_ways':paying_ways,
     }
     return render(request, 'store/checkout.html', context)
 
 
 @login_required
 def orders(request):
-    all_orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
+    orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
     your_account = request.user
-    return render(request, 'store/orders.html', {'orders': all_orders, 'your_account': your_account,})
+    return render(request, 'store/orders.html', {'orders': orders, 'your_account': your_account,})
 
 
 def custom_handler_404(request, exception):

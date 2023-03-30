@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Address, Category, Product, Cart, Order, FeedBack
+from .models import Address, Category, Product, Cart, Order, FeedBack, PayingWay
 
 # Register your models here.
 class AddressAdmin(admin.ModelAdmin):
@@ -8,6 +8,10 @@ class AddressAdmin(admin.ModelAdmin):
     list_per_page = 10
     search_fields = ('locality', 'city', 'state')
 
+class PayingWayAdmin(admin.ModelAdmin):
+    list_display = ('user', 'card_number', 'CVV')
+    list_per_page = 10
+    search_fields = ('card_number', 'CVV')
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'category_image', 'is_active', 'is_featured', 'updated_at')
@@ -49,6 +53,7 @@ class FeedbeckAdmin(admin.ModelAdmin):
     search_fields = ('user', 'email')
 
 admin.site.register(Address, AddressAdmin)
+admin.site.register(PayingWay, PayingWayAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Cart, CartAdmin)

@@ -111,13 +111,13 @@
                                         href="{% url 'store:home' %}"><i class="fas
                                                                      fa-long-arrow-alt-left mr-2">
                                 </i>Продовжити подорож магазином</a></div>
-{#                                <div class="col-md-6 text-md-right">#}
-{#                                    <div class="text-end" id="paypal-button-container">#}
-{#                                            <button type="submit" class="btn btn-dark btn-lg btn-outline-dark"#}
-{#                                                    type="submit"><i class="fas fa-dollar-sign mr-2"></i>Перейти до оформлення замовлення#}
-{#                                            </button>#}
-{#                                        </div>#}
-{#                                </div>#}
+                                {#                                <div class="col-md-6 text-md-right">#}
+                                {#                                    <div class="text-end" id="paypal-button-container">#}
+                                {#                                            <button type="submit" class="btn btn-dark btn-lg btn-outline-dark"#}
+                                {#                                                    type="submit"><i class="fas fa-dollar-sign mr-2"></i>Перейти до оформлення замовлення#}
+                                {#                                            </button>#}
+                                {#                                        </div>#}
+                                {#                                </div>#}
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,7 @@
                                 </ul>
 
 
-                                <h5 class="text-uppercase my-5">Виберіть адресу доставки</h5>
+                                <h5 class="text-uppercase my-5">Виберіть адресу доставки і спосіб оплати:</h5>
 
                                 <form action="{% url 'store:checkout' %}" id="myform">
 
@@ -164,21 +164,36 @@
                                                 ( {{ address.locality }}, {{ address.city }}, {{ address.state }} )
                                             </div>
                                         {% endfor %}
-                                    {% endif %}
-
-                                    <!-- Set up a container element for the button -->
-
-                                    {% if addresses %}
-                                            <div type="submit"  class="btn btn-dark btn-lg btn-outline-dark"
-                                                    type="submit"><i class="fas fa-dollar-sign mr-2"></i><a
-                                                    href="{% url 'store:orders' %}">Перейти до
-                                                офрмлення замовдення</a>
-                                            </div>
                                     {% else %}
                                         <b><h5 class="container">Ви не додали свою адресу проживання</h5></b>
                                         <div class="text-center">
-                                            Хочете <a href="{% url 'store:profile' %}"> додати адресу?</a>
+                                            Хочете <a href="{% url 'store:add-address' %}"> додати адресу?</a>
                                         </div>
+                                    {% endif %}
+                                    {% if paying_ways %}
+                                        {% for paying_way in paying_ways %}
+                                            <div class="mb-3">
+                                                <input type="radio" name="paying_way" value="{{ paying_way.id }}"
+                                                       checked>
+                                                <strong>Спосіб оплати
+                                                    {{ forloop.counter }}</strong> <br>
+                                                ( {{ paying_way.card_number }} )
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <b><h5 class="container">Ви не додали спосіб оплати</h5></b>
+                                        <div class="text-center">
+                                            Хочете <a href="{% url 'store:add-paying-way' %}"> додати спосіб оплати?</a>
+                                        </div>
+                                    {% endif %}
+                                    {% if addresses and paying_ways %}
+                                        <div class="text-end" id="paypal-button-container"></div>
+
+                                        {% comment %} For Cash on Delivery {% endcomment %}
+                                        <button type="submit" class="btn btn-dark btn-lg btn-outline-dark"
+                                                type="submit"><i class="fas fa-dollar-sign mr-2"></i>Перевітики
+                                            реквізити
+                                        </button>
                                     {% endif %}
                                 </form>
 
@@ -201,37 +216,37 @@
 
     </div>
 {% endblock content %}
-{##}
-{#{% block payment-gateway %}#}
-{#    <!-- Include the PayPal JavaScript SDK -->#}
-{#    <script src="https://www.paypal.com/sdk/js?client-id=YOUR-PAYPAL-CLIENT-ID&currency=USD"></script>#}
-{##}
-{#    <script>#}
-{#        // Render the PayPal button into #paypal-button-container#}
-{#        paypal.Buttons({#}
-{##}
-{#            // Set up the transaction#}
-{#            createOrder: function (data, actions) {#}
-{#                return actions.order.create({#}
-{#                    purchase_units: [{#}
-{#                        amount: {#}
-{#                            value: '{{total_amount}}'#}
-{#                        }#}
-{#                    }]#}
-{#                });#}
-{#            },#}
-{##}
-{#            // Finalize the transaction#}
-{#            onApprove: function (data, actions) {#}
-{#                return actions.order.capture().then(function (details) {#}
-{#                    // Show a success message to the buyer#}
-{#                    alert('Transaction completed by ' + details.payer.name.given_name + '!');#}
-{#                    // Savind Order in Database after Payment Success#}
-{#                    document.getElementById('myform').submit();#}
-{#                });#}
-{#            }#}
-{##}
-{##}
-{#        }).render('#paypal-button-container');#}
-{#    </script>#}
-{#{% endblock payment-gateway %}#}
+
+{% block payment-gateway %}
+    <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR-PAYPAL-CLIENT-ID&currency=USD"></script>
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        paypal.Buttons({
+
+            // Set up the transaction
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '{{total_amount}}'
+                        }
+                    }]
+                });
+            },
+
+            // Finalize the transaction
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    // Show a success message to the buyer
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                    // Savind Order in Database after Payment Success
+                    document.getElementById('myform').submit();
+                });
+            }
+
+
+        }).render('#paypal-button-container');
+    </script>
+{% endblock payment-gateway %}

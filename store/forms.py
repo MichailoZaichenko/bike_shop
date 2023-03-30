@@ -1,5 +1,5 @@
 from django.contrib.auth import password_validation
-from store.models import Address, FeedBack
+from store.models import Address, FeedBack, PayingWay
 from django import forms
 import django
 from django.contrib.auth.models import User
@@ -31,15 +31,22 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(label=_("Пароль"), strip=False, widget=forms.PasswordInput(attrs={
         'autocomplete': 'current-password', 'class': 'form-control'}))
 
+class PayingWayForm(forms.ModelForm):
+    class Meta:
+        model = PayingWay
+        fields = ['card_number', 'CVV']
+        labels = {'card_number':"Номер картки", 'CVV':'CVV'}
+        widgets = {'card_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введіть свій номер '
+                                                                                                 'картки'
+                                                                                                 ''}),
+                   'CVV': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введіть свій CVV'})}
 
 class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ['locality', 'city', 'state']
-        labels = {'locality':"Популярне місце", 'city':"Місто", 'state':"Штат"}
-        widgets = {'locality': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Популярне місце, '
-                                                                                              'як ресторан, релігійний '
-                                                                                              'сайт тощо.'}),
+        labels = {'locality':"Країна", 'city':"Місто", 'state':"Штат"}
+        widgets = {'locality': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Країна'}),
                    'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Місто'}),
                    'state': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Штат або столиця'})}
 
