@@ -4,16 +4,18 @@ from django.contrib.auth.models import User
 
 class FeedBack(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
-    email = models.CharField(max_length=50, verbose_name="Email")
+    email = models.EmailField(max_length=50, verbose_name="Email", blank=True, null=True)
     feedback = models.TextField(max_length=300, verbose_name="Feedback")
 
-    def __str__(self):
-        return self.locality
+    def save(self, *args, **kwargs):
+        self.email = self.user.email
+        super().save(*args, **kwargs)
+
 
 class PayingWay(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     card_number = models.CharField(max_length=20, verbose_name='card_number')
-    CVV = models.CharField(max_length=3, verbose_name='CVV')
+    CVV = models.CharField(max_length=3,  verbose_name='CVV')
 
     def __str__(self):
         return self.locality

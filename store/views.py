@@ -1,5 +1,7 @@
 import django
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.db.models.signals import post_save
 from store.models import Address, Cart, Category, Order, Product, FeedBack, PayingWay
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegistrationForm, AddressForm, FeedbackForm, PayingWayForm
@@ -97,20 +99,31 @@ def profile(request):
 class FeedbackView(View):
 
     def get(self, request):
+        email = request.user.email
         your_account = request.user
         form = FeedbackForm()
-        return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account,})
+        return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account, 'email':email})
 
     def post(self, request):
         form = FeedbackForm(request.POST)
         if form.is_valid():
             user = request.user
-            email = form.cleaned_data['email']
             feedback = form.cleaned_data['feedback']
-            reg = FeedBack(user=user, email=email, feedback=feedback)
+            reg = FeedBack(user=user, feedback=feedback)
             reg.save()
+
+            # Todo Отправка письма на email пользователя
+            # subject = 'Ваш відгук успішно надіслано'
+            # message = 'Доброго дня! Ваш відгук успішно надіслано.'
+            # from_email = 'michailo.zaichenko@gmail.com'  # Укажите ваш email
+            # recipient_list = [email]
+            # send_mail(subject, message, from_email, recipient_list)
+
             messages.success(request, "Вітаємо відгук надіслано успішно")
-        return redirect('store:profile')
+            return redirect('store:profile')
+        else:
+            your_account = request.user
+            return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account,})
 
 @method_decorator(login_required, name='dispatch')
 class PayingWayView(View):
@@ -128,7 +141,10 @@ class PayingWayView(View):
             reg = PayingWay(user=user, card_number=card_number, CVV=CVV)
             reg.save()
             messages.success(request, "Нова картка додана успішно")
-        return redirect('store:profile')
+            return redirect('store:profile')
+        else:
+            your_account = request.user
+            return render(request, 'account/add_paying_way.html', {'form': form, 'your_account': your_account,})
 
 @login_required
 def remove_payingway(request, id):
@@ -154,8 +170,10 @@ class AddressView(View):
             reg = Address(user=user, locality=locality, city=city, state=state)
             reg.save()
             messages.success(request, "Нову адресу успішно додано")
-        return redirect('store:profile')
-
+            return redirect('store:profile')
+        else:
+            your_account = request.user
+            return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account, })
 @login_required
 def remove_address(request, id):
     a = get_object_or_404(Address, user=request.user, id=id)

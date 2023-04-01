@@ -1,6 +1,4 @@
 const form = document.querySelector('form');
-const nameInput = document.getElementById('name');
-const addressInput = document.getElementById('address');
 const cardNumberInput = document.getElementById('card_number');
 const expirationDateInput = document.getElementById('expiration_date');
 const cvvInput = document.getElementById('cvv');

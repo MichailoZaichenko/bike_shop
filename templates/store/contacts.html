@@ -20,9 +20,14 @@
                 </ul>
             </div>
             <div class="col-md-6">
-                <form>
+                <form method="post" action="">
                     {% csrf_token %}
                     <h3>Напишіть нам</h3>
+                    <label for="id_feedback">Ваш Email:</label>
+                    <input type="email" name="email" class="form-control" placeholder="Введіть ваш email" value="
+{{ email }}"
+                           maxlength="50" id="id_email">
+                    <br>
                     {% for fm in form %}
                         <div class="form-group">
                             {{ fm.label_tag }}

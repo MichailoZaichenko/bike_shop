@@ -5,6 +5,7 @@ const tableElements = document.querySelectorAll('.table');
 const navElement = document.querySelector('nav');
 const headerElement = document.querySelector('header');
 
+
 // Получение сохраненной темы из localStorage
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
@@ -13,12 +14,14 @@ if (savedTheme) {
     table.classList.add(`table-${savedTheme}`);
   });
   headerElement.classList.add(`header-${savedTheme}`);
-  navElement.classList.add(`navbar-${savedTheme}`);
+  navElement.classList.add(`nav-${savedTheme}`);
 }
 
 toggleButton.addEventListener('click', () => {
   const currentTheme = bodyElement.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
   const newTheme = currentTheme === 'light-theme' ? 'dark-theme' : 'light-theme';
+  const savedTheme = localStorage.getItem('theme');
+  localStorage.setItem('theme', newTheme);
   bodyElement.classList.remove(currentTheme);
   bodyElement.classList.add(newTheme);
   tableElements.forEach(table => {
@@ -27,8 +30,8 @@ toggleButton.addEventListener('click', () => {
   });
   headerElement.classList.remove(`header-${currentTheme}`);
   headerElement.classList.add(`header-${newTheme}`);
-  navElement.classList.remove(`navbar-${currentTheme}`);
-  navElement.classList.add(`navbar-${newTheme}`);
+  navElement.classList.remove(`nav-${currentTheme}`);
+  navElement.classList.add(`nav-${newTheme}`);
 
   // Сохранение выбранной темы в localStorage
   localStorage.setItem('theme', newTheme);

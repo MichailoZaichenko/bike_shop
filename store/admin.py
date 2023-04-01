@@ -47,7 +47,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 class FeedbeckAdmin(admin.ModelAdmin):
     list_display = ('user', "email", 'feedback')
-    list_editable = ('feedback',)
+    list_editable = ("email",'feedback',)
     list_filter = ("email",)
     list_per_page = 20
     search_fields = ('user', 'email')
