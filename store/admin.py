@@ -46,11 +46,11 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ('user', 'product')
 
 class FeedbeckAdmin(admin.ModelAdmin):
-    list_display = ('user', "email", 'feedback')
+    list_display = ('user', 'created_at', "email", 'feedback')
     list_editable = ("email",'feedback',)
-    list_filter = ("email",)
+    list_filter = ("created_at",)
     list_per_page = 20
-    search_fields = ('user', 'email')
+    search_fields = ('user', 'created_at', "email", 'feedback')
 
 admin.site.register(Address, AddressAdmin)
 admin.site.register(PayingWay, PayingWayAdmin)

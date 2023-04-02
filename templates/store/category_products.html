@@ -41,63 +41,26 @@
                             {% endfor %}
                         {% endif %}
 
-                        <h6 class="text-uppercase mb-4">Діапазон цін</h6>
-                        <div class="price-range pt-4 mb-5">
-                            <div id="range"></div>
-                            <div class="row pt-2">
-                                <div class="col-6"><strong class="small font-weight-bold text-uppercase">Від</strong>
-                                </div>
-                                <div class="col-6 text-right"><strong class="small font-weight-bold
-                    text-uppercase">До</strong></div>
-                            </div>
-                        </div>
-                        <h6 class="text-uppercase mb-3">Показувати</h6>
-                        <div class="custom-control custom-checkbox mb-1">
-                            <input class="custom-control-input" id="customCheck1" type="checkbox">
-                            <label class="custom-control-label text-small" for="customCheck1">Приймаються
-                                повернення</label>
-                        </div>
-                        <div class="custom-control custom-checkbox mb-1">
-                            <input class="custom-control-input" id="customCheck2" type="checkbox">
-                            <label class="custom-control-label text-small" for="customCheck2">Приймаються
-                                повернення</label>
-                        </div>
-                        <div class="custom-control custom-checkbox mb-1">
-                            <input class="custom-control-input" id="customCheck3" type="checkbox">
-                            <label class="custom-control-label text-small" for="customCheck3">Завершені продукти</label>
-                        </div>
-                        <div class="custom-control custom-checkbox mb-1">
-                            <input class="custom-control-input" id="customCheck4" type="checkbox">
-                            <label class="custom-control-label text-small" for="customCheck4">Продані продукти</label>
-                        </div>
-                        <div class="custom-control custom-checkbox mb-1">
-                            <input class="custom-control-input" id="customCheck5" type="checkbox">
-                            <label class="custom-control-label text-small" for="customCheck5">Угоди &amp;
-                                Економія</label>
-                        </div>
-                        <div class="custom-control custom-checkbox mb-4">
-                            <input class="custom-control-input" id="customCheck6" type="checkbox">
-                            <label class="custom-control-label text-small" for="customCheck6">Авторизований
-                                продавець</label>
-                        </div>
-                        <h6 class="text-uppercase mb-3">Форма купівлі</h6>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="customRadio1" type="radio" name="customRadio">
-                            <label class="custom-control-label text-small" for="customRadio1">Всі списки</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="customRadio2" type="radio" name="customRadio">
-                            <label class="custom-control-label text-small" for="customRadio2">Найкраща
-                                пропозиції</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="customRadio3" type="radio" name="customRadio">
-                            <label class="custom-control-label text-small" for="customRadio3">Аукціон</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input class="custom-control-input" id="customRadio4" type="radio" name="customRadio">
-                            <label class="custom-control-label text-small" for="customRadio4">Купити це зараз</label>
-                        </div>
+{#                        <h6 class="text-uppercase mb-4">Діапазон цін</h6>#}
+{#                        <form id="filter-form" method="POST">#}
+{#                            {% csrf_token %}#}
+{#                            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">#}
+{#                            <div class="price-range pt-4 mb-5">#}
+{#                                <div id="range"></div>#}
+{#                                <div class="row pt-2">#}
+{#                                    <div class="col-6">#}
+{#                                        <strong class="small font-weight-bold text-uppercase">Від</strong>#}
+{#                                        <input type="number" name="min_price" class="form-control" id="min_price">#}
+{#                                    </div>#}
+{#                                    <div class="col-6 text-right">#}
+{#                                        <strong class="small font-weight-bold text-uppercase">До</strong>#}
+{#                                        <input type="number" name="max_price" class="form-control" id="max_price">#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <button type="submit" class="btn btn-primary">Фільтрувати</button>#}
+{#                        </form>#}
+
                     </div>
                     <!-- SHOP LISTING-->
                     <div class="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
@@ -116,7 +79,6 @@
                                         <select class="selectpicker ml-auto" name="sorting" data-width="200"
                                                 data-style="bs-select-form-control" data-title="Звичайне сортування">
                                             <option value="default">Сортування за замовчуванням</option>
-                                            <option value="popularity">Популярність</option>
                                             <option value="low-high">Ціна: від низької до високої</option>
                                             <option value="high-low">Ціна: від високої до низької</option>
                                         </select>
@@ -128,7 +90,7 @@
                         <div class="row">
 
                             {% if products %}
-                                {% for product in products %}
+                                {% for product in products|slice:":12" %}
 
                                     <!-- PRODUCT-->
                                     <div class="col-lg-4 col-sm-6" style="height: 300px">
@@ -152,10 +114,10 @@
 
                                                 <div class="product-overlay">
                                                     <ul class="mb-0 list-inline">
-{#                                            Todo add to like#}
-{#                                                        <li class="list-inline-item m-0 p-0"><a#}
-{#                                                                class="btn btn-sm btn-outline-dark" href="#"><i#}
-{#                                                                class="far fa-heart"></i></a></li>#}
+                                                        {#                                            Todo add to like#}
+                                                        {#                                                        <li class="list-inline-item m-0 p-0"><a#}
+                                                        {#                                                                class="btn btn-sm btn-outline-dark" href="#"><i#}
+                                                        {#                                                                class="far fa-heart"></i></a></li>#}
                                                         <li class="list-inline-item m-0 p-0">
                                                             {% comment %} <a class="btn btn-sm btn-dark" href="{% url 'store:add-to-cart' %}">Add to cart</a> {% endcomment %}
 
@@ -163,7 +125,7 @@
                                                                 <input type="hidden" name="prod_id"
                                                                        value="{{ product.id }}" id="product_id">
                                                                 <button type="submit" class="btn btn-sm
-                                                                btn-dark">Додати в кошик
+                                                                btn-dark" style="border-radius: 1.25rem;">Додати в кошик
                                                                 </button>
                                                             </form>
 
@@ -184,47 +146,47 @@
 
                         </div>
                         <!-- PAGINATION-->
-                                        <nav aria-label="Page navigation example">
-                                          <ul class="pagination justify-content-center justify-content-lg-end">
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                          </ul>
-                                        </nav>
+                        {#                                        <nav aria-label="Page navigation example">#}
+                        {#                                          <ul class="pagination justify-content-center justify-content-lg-end">#}
+                        {#                                            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>#}
+                        {#                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>#}
+                        {#                                            <li class="page-item"><a class="page-link" href="#">2</a></li>#}
+                        {#                                            <li class="page-item"><a class="page-link" href="#">3</a></li>#}
+                        {#                                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>#}
+                        {#                                          </ul>#}
+                        {#                                        </nav>#}
 
-{#                        {% if is_paginated %}#}
-{#                            <nav aria-label="Page navigation example">#}
-{#                                <ul class="pagination justify-content-center justify-content-lg-end">#}
-{#                                    {% if page_obj.has_previous %}#}
-{#                                        <li class="page-item"><a class="page-link"#}
-{#                                                                 href="?page={{ page_obj.previous_page_number }}">&laquo;</a>#}
-{#                                        </li>#}
-{#                                    {% else %}#}
-{#                                        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>#}
-{#                                    {% endif %}#}
-{##}
-{#                                    {% for page_num in paginator.page_range %}#}
-{#                                        {% if page_obj.number == page_num %}#}
-{#                                            <li class="page-item active"><span class="page-link">{{ page_num }} <span#}
-{#                                                    class="sr-only">(current)</span></span></li>#}
-{#                                        {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}#}
-{#                                            <li class="page-item"><a class="page-link"#}
-{#                                                                     href="?page={{ page_num }}">{{ page_num }}</a></li>#}
-{#                                        {% endif %}#}
-{#                                    {% endfor %}#}
-{##}
-{#                                    {% if page_obj.has_next %}#}
-{#                                        <li class="page-item"><a class="page-link"#}
-{#                                                                 href="?page={{ page_obj.next_page_number }}">&raquo;</a>#}
-{#                                        </li>#}
-{#                                    {% else %}#}
-{#                                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>#}
-{#                                    {% endif %}#}
-{#                                </ul>#}
-{#                            </nav>#}
-{#                        {% endif %}#}
+                        {% if is_paginated %}
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center justify-content-lg-end">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                                    {% endif %}
+
+                                    {% for page_num in paginator.page_range %}
+                                        {% if page_obj.number == page_num %}
+                                            <li class="page-item active"><span class="page-link">{{ page_num }} <span
+                                                    class="sr-only">(current)</span></span></li>
+                                        {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
+                                            <li class="page-item"><a class="page-link"
+                                                                     href="?page={{ page_num }}">{{ page_num }}</a></li>
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item"><a class="page-link"
+                                                                 href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        {% endif %}
                     </div>
                 </div>
             </div>

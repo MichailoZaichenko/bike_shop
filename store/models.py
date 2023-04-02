@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 #Todo Create your models here.
 
@@ -6,6 +7,7 @@ class FeedBack(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     email = models.EmailField(max_length=50, verbose_name="Email", blank=True, null=True)
     feedback = models.TextField(max_length=300, verbose_name="Feedback")
+    created_at = models.DateTimeField(default=timezone.now, verbose_name="Created at")
 
     def save(self, *args, **kwargs):
         self.email = self.user.email

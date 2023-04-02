@@ -1,4 +1,7 @@
 import django
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models.signals import post_save
@@ -70,7 +73,6 @@ def category_products(request, slug):
     }
     return render(request, 'store/category_products.html', context)
 
-
 # Registration
 
 class RegistrationView(View):
@@ -109,7 +111,7 @@ class FeedbackView(View):
         if form.is_valid():
             user = request.user
             feedback = form.cleaned_data['feedback']
-            reg = FeedBack(user=user, feedback=feedback)
+            reg = FeedBack(user=user, feedback=feedback, created_at=timezone.now())
             reg.save()
 
             # Todo Отправка письма на email пользователя

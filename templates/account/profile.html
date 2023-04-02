@@ -12,7 +12,7 @@
             <p><strong>Ім'я:</strong> {{ request.user.username }}</p>
             <p><a class="btn btn-primary btn-large" href="{% url 'store:add-address' %}">Додати адрес ></a>
                 <a class="btn btn-primary btn-large" href="{% url 'store:add-paying-way' %}">Додати спосіб оплати ></a>
-                <a class="btn btn-outline-primary btn-large" href="#">Мої замовлення »</a></p>
+                <a class="btn btn-outline-primary btn-large" href="{% url 'store:orders' %}">Мої замовлення »</a></p>
         </div>
 
 
