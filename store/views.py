@@ -61,6 +61,18 @@ def all_categories(request):
 def category_products(request, slug):
     category = get_object_or_404(Category, slug=slug)
     products = Product.objects.filter(is_active=True, category=category)
+
+    if request.method == 'POST':
+        sort_order = request.POST.get('sort_order')
+        if sort_order == 'price_low_to_high':
+            products = products.order_by('price')
+        elif sort_order == 'price_high_to_low':
+            products = products.order_by('-price')
+        elif sort_order == 'defalt':
+            products = products.order_by('id')
+    else:
+        products = products.order_by('id')
+
     categories = Category.objects.filter(is_active=True)
     count_of_products = Product.objects.all().count()
     your_account = request.user

@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head %}
+    <link href="{% static 'css/sorting.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
 {% block content %}
 
     <div class="container">
@@ -53,28 +57,18 @@
                             <div class="col-lg-6">
                                 <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                                     <li class="list-inline-item">
-{#                                        <form action="{% url 'category-products' category.slug %}" method="get">#}
-                                            <!-- Вивести кнопки для вибору сортування -->
-                                            <select class="selectpicker ml-auto" name="sorting" data-width="200"
-                                                    data-style="bs-select-form-control"
-                                                    data-title="Звичайне сортування">
-                                                <option value="default"
-                                                        {% if sorting == "default" %}selected{% endif %}>Сортування за
-                                                    замовчуванням
-                                                </option>
-                                                <option value="low-high"
-                                                        {% if sorting == "low-high" %}selected{% endif %}>Ціна: від
-                                                    низької до високої
-                                                </option>
-                                                <option value="high-low"
-                                                        {% if sorting == "high-low" %}selected{% endif %}>Ціна: від
-                                                    високої до низької
-                                                </option>
+                                        <label for="sort_order" class="mr-2 mb-0">Відсортувати:</label>
+                                        <form method="post" class="d-flex align-items-center">
+                                            {% csrf_token %}
+                                            <select name="sort_order" id="sort_order" class="form-select mr-2">
+                                                <option value="defalt">Сортування за замовчуванням</option>
+                                                <option value="price_low_to_high">Ціна: від низької до високої</option>
+                                                <option value="price_high_to_low">Ціна: від високої до низької</option>
                                             </select>
-                                            <!-- Додати кнопку для відправки запиту -->
-{#                                            <input type="submit" value="Сортувати">#}
-{#                                        </form>#}
+                                            <button type="submit" class="btn btn-primary">Сортувати</button>
+                                        </form>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -83,8 +77,8 @@
 
                             {% if products %}
                                 {#                                Todo fix it and padination#}
-                                {% for product in products|slice:":12" %}
-
+{#                                {% for product in products|slice:":12" %}#}
+                                {% for product in products %}
                                     <!-- PRODUCT-->
                                     <div class="col-lg-4 col-sm-6" style="height: 300px">
                                         <div class="product text-center">
@@ -95,7 +89,8 @@
                                                 <a class="d-block" style="max-height: 170px; margin-bottom: 5px;" href=
                                                         "{% url 'store:product-detail' product.slug %}">
                                                     {% if product.product_image %}
-                                                        <img class="img-fluid w-100" style="max-height: 170px; margin-bottom: 5px;"
+                                                        <img class="img-fluid w-100"
+                                                             style="max-height: 170px; margin-bottom: 5px;"
                                                              src="{{ product.product_image.url }}"
                                                              alt="{{ product.title }}">
                                                     {% else %}
