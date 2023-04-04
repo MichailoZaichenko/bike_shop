@@ -19,8 +19,11 @@ class PayingWay(models.Model):
     card_number = models.CharField(max_length=20, verbose_name='card_number')
     CVV = models.CharField(max_length=3,  verbose_name='CVV')
 
+
     def __str__(self):
-        return self.locality
+        return f"{self.card_number} ({self.user.username})"
+    # def __str__(self):
+    #     return self.locality
 
 class Address(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
@@ -29,7 +32,7 @@ class Address(models.Model):
     state = models.CharField(max_length=150, verbose_name="State")
 
     def __str__(self):
-        return self.locality
+        return f"{self.city}({self.locality})"
 
 
 class Category(models.Model):
@@ -99,6 +102,8 @@ STATUS_CHOICES = (
 class Order(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
     address = models.ForeignKey(Address, verbose_name="Shipping Address", on_delete=models.CASCADE)
+    paying_way = models.ForeignKey(PayingWay, verbose_name="Paying Way", on_delete=models.CASCADE, blank=True,
+                                   null=True)
     product = models.ForeignKey(Product, verbose_name="Product", on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(verbose_name="Quantity")
     ordered_date = models.DateTimeField(auto_now_add=True, verbose_name="Ordered Date")

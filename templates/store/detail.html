@@ -134,7 +134,8 @@
                     <div class="d-block mb-3 position-relative">
                       <a class="d-block" href="{% url 'store:product-detail' rp.slug %}">
                         {% if rp.product_image %}
-                          <img class="img-fluid w-100" style="max-height: 170px" src="{{rp.product_image.url}}" alt="{{rp.title}}">
+                          <img class="img-fluid w-100" style="max-height: 170px; margin-bottom: 5px;" src=
+                                  "{{rp.product_image.url}}" alt="{{rp.title}}">
                         {% else %}
                         <img class="img-fluid w-100" style="height: 170px; width: 170px;" src=
                                 "{% static 'img/not_img.png' %}"

@@ -141,11 +141,12 @@
 
                                     <a class="d-block" href="{% url 'store:product-detail' product.slug %}">
                                         {% if product.product_image %}
-                                            <img class="img-fluid w-100" style="max-height: 170px" src=
+                                            <img class="img-fluid w-100" style="max-height: 170px; margin-bottom: 5px;"
+                                                 src=
                                                     "{{ product.product_image.url }}"
                                                  alt="{{ product.title }}">
                                         {% else %}
-                                            <img class="img-fluid w-100" style="max-height: 170px"
+                                            <img class="img-fluid w-100" style="max-height: 170px; margin-bottom: 5px;"
                                                  src="{% static 'img/not_img.png' %}"
                                                  alt="{{ product.title }}">
                                         {% endif %}

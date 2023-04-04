@@ -39,8 +39,8 @@ class CartAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('user', 'product', 'quantity', 'status', 'ordered_date')
-    list_editable = ('quantity', 'status')
+    list_display = ('user', 'product', "address", 'quantity', 'status', 'ordered_date')
+    list_editable = ('status',)
     list_filter = ('status', 'ordered_date')
     list_per_page = 20
     search_fields = ('user', 'product')

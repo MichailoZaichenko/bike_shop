@@ -48,7 +48,6 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {#Todo add this to chackout.html#}
                                 {% for cart_product in cart_products %}
                                     <tr>
                                         <th class="pl-0 border-0" scope="row">
@@ -62,7 +61,7 @@
                                                 {% else %}
                                                     <a class="reset-anchor d-block animsition-link"
                                                        href="{% url 'store:product-detail' cart_product.product.slug %}"><img
-                                                            src="{% static 'img/product-detail-3.jpg' %}"
+                                                            src="{% static 'img/not_img.png' %}"
                                                             alt="{{ cart_product.product.title }}" width="70"/></a>
                                                 {% endif %}
 
