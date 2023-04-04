@@ -325,7 +325,5 @@ def custom_handler_404(request, exception):
 
 
 
-
-
 def test(request):
     return render(request, 'store/test.html')
