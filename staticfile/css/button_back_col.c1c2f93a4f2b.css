@@ -1,0 +1,38 @@
+*.light-theme {
+  background-color: #FFFFFF;
+  color: #212529;
+}
+
+/* Стили для тёмной темы */
+*.dark-theme {
+  background-color: #212529;
+  color: #FFFFFF;
+}
+
+.light-theme .table {
+color: #212529;
+}
+
+.dark-theme .table {
+color: #FFFFFF;
+}
+
+.navbar-light {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.navbar-dark {
+  background-color: #212529;
+  color: #FFFFFF;
+}
+
+.header-light {
+  background-color: #ffffff;
+  color: #212529;
+}
+
+.header-dark {
+  background-color: #212529;
+  color: #FFFFFF;
+}
