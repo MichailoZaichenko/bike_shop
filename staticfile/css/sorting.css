@@ -1,0 +1,15 @@
+form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+label {
+  margin-right: 10px;
+}
+select {
+  margin-right: 10px;
+}
+button {
+  margin-left: 10px;
+}

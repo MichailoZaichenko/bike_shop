@@ -1,1 +1,1 @@
-worker: python manage.py
+web: gunicorn bike_shop_Wellbike.wsgi --log-file -

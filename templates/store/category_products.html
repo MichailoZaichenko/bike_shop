@@ -57,10 +57,10 @@
                             <div class="col-lg-6">
                                 <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                                     <li class="list-inline-item">
-                                        <label for="sort_order" class="mr-2 mb-0">Відсортувати:</label>
+{#                                        <label for="sort_order" class="mr-2 mb-0">Відсортувати:</label>#}
                                         <form method="post" class="d-flex align-items-center">
                                             {% csrf_token %}
-                                            <select name="sort_order" id="sort_order" class="form-select mr-2">
+                                            <select name="sort_order" id="sort_order" class="form-select selectpicker">
                                                 <option value="defalt">Сортування за замовчуванням</option>
                                                 <option value="price_low_to_high">Ціна: від низької до високої</option>
                                                 <option value="price_high_to_low">Ціна: від високої до низької</option>
