@@ -104,8 +104,8 @@ class RegistrationView(View):
             messages.success(request, "Щиро вітаю! Реєстрація успішна!")
             form.save()
         # return render(request, 'account/register.html', {'form': form})
-        return redirect('store:login')
-
+        # return redirect('store:login')
+        return render(request, 'account/register.html', {'form': form})
 
 @login_required
 def profile(request):
