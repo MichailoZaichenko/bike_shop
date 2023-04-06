@@ -101,7 +101,7 @@ class RegistrationView(View):
     def post(self, request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            messages.success(request, "Щиро вітаю! Реєстрація успішна!")
+            messages.success(request, "Щиро вітаю! Реєстрація успішна! Натисніть кнопку увійти, щоб зайти в акаунт!")
             form.save()
         # return render(request, 'account/register.html', {'form': form})
         # return redirect('store:login')
