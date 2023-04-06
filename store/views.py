@@ -91,14 +91,14 @@ class RegistrationView(View):
     def get(self, request):
         form = RegistrationForm()
         return render(request, 'account/register.html', {'form': form})
-    
+
     def post(self, request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             messages.success(request, "Щиро вітаю! Реєстрація успішна!")
             form.save()
         # return render(request, 'account/register.html', {'form': form})
-        return redirect('store:profile')
+        return redirect('store:login')
         
 
 @login_required
