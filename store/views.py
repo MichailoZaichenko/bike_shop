@@ -14,6 +14,7 @@ import decimal
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
+
 def home(request):
     categories = Category.objects.filter(is_active=True, is_featured=True)[:6]
     products = Product.objects.filter(is_active=True, is_featured=True)[:12]
@@ -21,24 +22,28 @@ def home(request):
     context = {
         'categories': categories,
         'products': products,
-        'your_account':your_account,
+        'your_account': your_account,
     }
     return render(request, 'store/index.html', context)
 
+
 def main(request):
     your_account = request.user
-    context = {'your_account':your_account,}
+    context = {'your_account': your_account, }
     return render(request, 'store/main.html', context)
+
 
 def contacts(request):
     your_account = request.user
-    context = {'your_account':your_account,}
+    context = {'your_account': your_account, }
     return render(request, 'store/contacts.html', context)
+
 
 def about(request):
     your_account = request.user
-    context = {'your_account':your_account,}
+    context = {'your_account': your_account, }
     return render(request, 'store/about.html', context)
+
 
 def detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
@@ -55,7 +60,7 @@ def detail(request, slug):
 def all_categories(request):
     categories = Category.objects.filter(is_active=True)
     your_account = request.user
-    return render(request, 'store/categories.html', {'categories':categories, "your_account":request.user})
+    return render(request, 'store/categories.html', {'categories': categories, "your_account": request.user})
 
 
 def category_products(request, slug):
@@ -80,10 +85,11 @@ def category_products(request, slug):
         'category': category,
         'products': products,
         'categories': categories,
-        'count_of_products':count_of_products,
+        'count_of_products': count_of_products,
         'your_account': your_account,
     }
     return render(request, 'store/category_products.html', context)
+
 
 # Registration
 
@@ -99,7 +105,7 @@ class RegistrationView(View):
             form.save()
         # return render(request, 'account/register.html', {'form': form})
         return redirect('store:login')
-        
+
 
 @login_required
 def profile(request):
@@ -107,8 +113,9 @@ def profile(request):
     paying_ways = PayingWay.objects.filter(user=request.user)
     orders = Order.objects.filter(user=request.user)
     your_account = request.user
-    return render(request, 'account/profile.html', {'addresses':addresses, 'orders':orders, 'your_account':
-        your_account,'paying_ways':paying_ways})
+    return render(request, 'account/profile.html', {'addresses': addresses, 'orders': orders, 'your_account':
+        your_account, 'paying_ways': paying_ways})
+
 
 @method_decorator(login_required, name='dispatch')
 class FeedbackView(View):
@@ -117,7 +124,7 @@ class FeedbackView(View):
         email = request.user.email
         your_account = request.user
         form = FeedbackForm()
-        return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account, 'email':email})
+        return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account, 'email': email})
 
     def post(self, request):
         form = FeedbackForm(request.POST)
@@ -138,19 +145,20 @@ class FeedbackView(View):
             return redirect('store:profile')
         else:
             your_account = request.user
-            return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account,})
+            return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account, })
+
 
 @method_decorator(login_required, name='dispatch')
 class PayingWayView(View):
     def get(self, request):
         your_account = request.user
         form = PayingWayForm()
-        return render(request, 'account/add_paying_way.html', {'form': form, 'your_account': your_account,})
+        return render(request, 'account/add_paying_way.html', {'form': form, 'your_account': your_account, })
 
     def post(self, request):
         form = PayingWayForm(request.POST)
         if form.is_valid():
-            user=request.user
+            user = request.user
             card_number = form.cleaned_data['card_number']
             CVV = form.cleaned_data['CVV']
             reg = PayingWay(user=user, card_number=card_number, CVV=CVV)
@@ -159,7 +167,8 @@ class PayingWayView(View):
             return redirect('store:profile')
         else:
             your_account = request.user
-            return render(request, 'account/add_paying_way.html', {'form': form, 'your_account': your_account,})
+            return render(request, 'account/add_paying_way.html', {'form': form, 'your_account': your_account, })
+
 
 @login_required
 def remove_payingway(request, id):
@@ -168,17 +177,18 @@ def remove_payingway(request, id):
     messages.success(request, "Картка прибрана!")
     return redirect('store:profile')
 
+
 @method_decorator(login_required, name='dispatch')
 class AddressView(View):
     def get(self, request):
         your_account = request.user
         form = AddressForm()
-        return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account,})
+        return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account, })
 
     def post(self, request):
         form = AddressForm(request.POST)
         if form.is_valid():
-            user=request.user
+            user = request.user
             locality = form.cleaned_data['locality']
             city = form.cleaned_data['city']
             state = form.cleaned_data['state']
@@ -189,12 +199,15 @@ class AddressView(View):
         else:
             your_account = request.user
             return render(request, 'account/add_address.html', {'form': form, 'your_account': your_account, })
+
+
 @login_required
 def remove_address(request, id):
     a = get_object_or_404(Address, user=request.user, id=id)
     a.delete()
     messages.success(request, "Адрес прибран!")
     return redirect('store:profile')
+
 
 @login_required
 def add_to_cart(request):
@@ -210,8 +223,9 @@ def add_to_cart(request):
         cp.save()
     else:
         Cart(user=user, product=product).save()
-    
+
     return redirect('store:cart')
+
 
 @login_required
 def cart(request):
@@ -223,7 +237,7 @@ def cart(request):
     amount = decimal.Decimal(0)
     shipping_amount = decimal.Decimal(10)
     # using list comprehension to calculate total amount based on quantity and shipping
-    cp = [p for p in Cart.objects.all() if p.user==user]
+    cp = [p for p in Cart.objects.all() if p.user == user]
     if cp:
         for p in cp:
             temp_amount = (p.quantity * p.product.price)
@@ -307,9 +321,9 @@ def checkout(request):
         'total_amount': amount + shipping_amount,
         'addresses': addresses,
         'your_account': your_account,
-        'email':email,
-        'addresses':addresses,
-        'paying_ways':paying_ways,
+        'email': email,
+        'addresses': addresses,
+        'paying_ways': paying_ways,
     }
     return render(request, 'store/checkout.html', context)
 
@@ -318,12 +332,11 @@ def checkout(request):
 def orders(request):
     orders = Order.objects.filter(user=request.user).order_by('-ordered_date')
     your_account = request.user
-    return render(request, 'store/orders.html', {'orders': orders, 'your_account': your_account,})
+    return render(request, 'store/orders.html', {'orders': orders, 'your_account': your_account, })
 
 
 def custom_handler_404(request, exception):
     return render(request, '404.html', status=404)
-
 
 
 def test(request):
