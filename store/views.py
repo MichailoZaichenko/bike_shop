@@ -97,7 +97,8 @@ class RegistrationView(View):
         if form.is_valid():
             messages.success(request, "Щиро вітаю! Реєстрація успішна!")
             form.save()
-        return render(request, 'account/register.html', {'form': form})
+        # return render(request, 'account/register.html', {'form': form})
+        return redirect('store:profile')
         
 
 @login_required
