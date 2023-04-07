@@ -33,7 +33,12 @@
                                     {% for fm in form %}
                                         <div class="form-group">
                                             {{ fm.label_tag }}
-                                            {{ fm }}
+                                            {% if fm.auto_id == 'id_password' %}
+                                                {{ fm }}
+                                                <button type="button" class="btn btn-sm btn-primary" id="showPassword">Показати</button>
+                                            {% else %}
+                                                {{ fm }}
+                                            {% endif %}
                                             <small class="text-danger">{{ fm.errors|striptags }}</small>
                                         </div>
                                     {% endfor %}
@@ -61,4 +66,7 @@
         </div>
     </div>
     </div>
+{% block script %}
+    <script src="{% static 'js/password_js.js' %}" type="text/javascript"></script>
+{% endblock script%}
 {% endblock content %}
