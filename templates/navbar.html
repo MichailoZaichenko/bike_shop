@@ -14,10 +14,10 @@
 <!-- navbar-->
 <header>
     <div class="container px-0 px-lg-3">
-        <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0">
+        <nav class="navbar navbar-expand-lg py-3 px-lg-0">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    aria-label="Toggle navigation"><i class="fa-solid fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
@@ -50,9 +50,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'store:about' %}">Про нас</a>
                     </li>
-{#                    <li>#}
-{#                        <div id="toggle-theme" class="btn btn-primary">🌣</div>#}
-{#                    </li>#}
+                    <li>
+                        <div id="toggle-theme" class="btn btn-primary">🌣</div>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}

@@ -10,7 +10,7 @@
             <div class="container">
                 <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
                     <div class="col-lg-6">
-                        <h1 class="h2 text-uppercase mb-0">Перевірити</h1>
+                        <h1 class="h2 text-uppercase mb-0 text-dark">Перевірити</h1>
                     </div>
                     <div class="col-lg-6 text-lg-right">
                         <nav aria-label="breadcrumb">
@@ -59,16 +59,14 @@
                                 {% endfor %}
                             </div>
                             <div class="col-lg-6 form-group">
-                                <div class="custom-control custom-checkbox">
                                     <b><label class="text-small text-uppercase" for="city">Номер картки</label></b>
                                     {% for paying_way in paying_ways %}
                                         <div>{{ paying_way.card_number }}</div>
                                     {% endfor %}
-                                </div>
                             </div>
                             <div class="col-lg-12 form-group">
                                 {#                                <button  class="btn btn-dark" type="submit">Зробити замовлення</button>#}
-                                <a href="{% url 'store:orders' %}" class="btn btn-primary">Зробити замовлення</a>
+                                <a href="{% url 'store:orders' %}" class="btn btn-primary rounded">Зробити замовлення</a>
 
                             </div>
                         </div>

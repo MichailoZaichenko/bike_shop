@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
                     <div class="col-lg-6">
-                        <h1 class="h2 text-uppercase mb-0">Кошик</h1>
+                        <h1 class="h2 text-uppercase mb-0 text-dark">Кошик</h1>
                     </div>
                     <div class="col-lg-6 text-lg-right">
                         <nav aria-label="breadcrumb">
@@ -37,13 +37,13 @@
                                 <thead class="bg-light">
                                 <tr>
                                     <th class="border-0" scope="col"><strong
-                                            class="text-small text-uppercase">Продукт</strong></th>
+                                            class="text-small text-uppercase text-dark">Продукт</strong></th>
                                     <th class="border-0" scope="col"><strong
-                                            class="text-small text-uppercase">Ціна</strong></th>
+                                            class="text-small text-uppercase text-dark">Ціна</strong></th>
                                     <th class="border-0" scope="col"><strong class="text-small
-                      text-uppercase">Кількість</strong></th>
+                      text-uppercase text-dark">Кількість</strong></th>
                                     <th class="border-0" scope="col"><strong
-                                            class="text-small text-uppercase">Всього</strong></th>
+                                            class="text-small text-uppercase text-dark">Всього</strong></th>
                                     <th class="border-0" scope="col"></th>
                                 </tr>
                                 </thead>
@@ -124,19 +124,19 @@
                     <div class="col-lg-4">
                         <div class="card border-0 rounded-0 p-lg-4 bg-light">
                             <div class="card-body">
-                                <h5 class="text-uppercase mb-4">Всього в кошику</h5>
+                                <h5 class="text-uppercase mb-4 text-dark">Всього в кошику</h5>
                                 <ul class="list-unstyled mb-0">
                                     <li class="d-flex align-items-center justify-content-between"><strong
-                                            class="text-uppercase small font-weight-bold">Проміжний
-                                        підсумок</strong><span class="text-muted small">${{ amount|intcomma }}</span>
+                                            class="text-uppercase small font-weight-bold text-dark">Проміжний
+                                        підсумок</strong><span class="text-muted small text-dark">${{ amount|intcomma }}</span>
                                     </li>
                                     <li class="d-flex align-items-center justify-content-between"><strong
-                                            class="text-uppercase small font-weight-bold">Вартість
-                                        доставки</strong><span class="text-muted small">+ ${{ shipping_amount }}</span>
+                                            class="text-uppercase small font-weight-bold text-dark">Вартість
+                                        доставки</strong><span class="text-muted small text-dark">+ ${{ shipping_amount }}</span>
                                     </li>
                                     <li class="border-bottom my-2"></li>
                                     <li class="d-flex align-items-center justify-content-between mb-4"><strong class="text-uppercase
-                    small font-weight-bold">Всього</strong><span>${{ total_amount|intcomma }}</span></li>
+                    small font-weight-bold text-dark">Всього</strong><span class="text-dark">${{ total_amount|intcomma }}</span></li>
                                     <li>
 
                                         {% comment %} <form action="#">
@@ -150,31 +150,31 @@
                                 </ul>
 
 
-                                <h5 class="text-uppercase my-5">Виберіть адресу доставки і спосіб оплати:</h5>
+                                <h5 class="text-uppercase my-5 text-dark">Виберіть адресу доставки і спосіб оплати:</h5>
 
                                 <form action="{% url 'store:checkout' %}" id="myform">
 
                                     {% if addresses %}
                                         {% for address in addresses %}
-                                            <div class="mb-3">
+                                            <div class="mb-3 text-dark">
                                                 <input type="radio" name="address" value="{{ address.id }}" checked>
-                                                <strong>Адресса
+                                                <strong class="text-dark">Адресса
                                                     {{ forloop.counter }}</strong> <br>
                                                 ( {{ address.locality }}, {{ address.city }}, {{ address.state }} )
                                             </div>
                                         {% endfor %}
                                     {% else %}
-                                        <b><h5 class="container">Ви не додали свою адресу проживання</h5></b>
-                                        <div class="text-center">
+                                        <b><h5 class="container text-dark">Ви не додали свою адресу проживання</h5></b>
+                                        <div class="text-center text-dark">
                                             Хочете <a href="{% url 'store:add-address' %}"> додати адресу?</a>
                                         </div>
                                     {% endif %}
                                     {% if paying_ways %}
                                         {% for paying_way in paying_ways %}
-                                            <div class="mb-3">
+                                            <div class="mb-3 text-dark">
                                                 <input type="radio" name="paying_way" value="{{ paying_way.id }}"
                                                        checked>
-                                                <strong>Спосіб оплати
+                                                <strong class="text-dark">Спосіб оплати
                                                     {{ forloop.counter }}</strong> <br>
                                                 ( {{ paying_way.card_number }} )
                                             </div>
