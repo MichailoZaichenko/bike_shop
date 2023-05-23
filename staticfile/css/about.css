@@ -1,0 +1,18 @@
+ .left {
+     float: left;
+     width: 50%;
+     margin-right: 2%;
+     margin-bottom: 50px;
+ }
+
+ .right {
+     margin: 0 40px 50px 40px;
+ }
+
+ .clear {
+  clear: both;
+}
+
+ .wrapper {
+     margin-bottom: 50px;
+ }
