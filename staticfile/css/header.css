@@ -35,3 +35,12 @@
 .custom-text {
     font-size: 17px;
 }
+
+a {
+    font-weight: bolder;
+}
+
+#toggle-theme {
+    border-radius: 10px;
+
+}
