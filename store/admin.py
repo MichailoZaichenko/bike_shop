@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import Address, Category, Product, Cart, Order, FeedBack, PayingWay
-
+from modeltranslation.admin import TranslationAdmin
 # Register your models here.
+
 class AddressAdmin(admin.ModelAdmin):
     list_display = ('user', 'locality', 'city', 'state')
     list_filter = ('city', 'state')
@@ -13,7 +14,7 @@ class PayingWayAdmin(admin.ModelAdmin):
     list_per_page = 10
     search_fields = ('card_number', 'CVV')
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     list_display = ('title', 'slug', 'category_image', 'is_active', 'is_featured', 'updated_at')
     list_editable = ('slug', 'is_active', 'is_featured')
     list_filter = ('is_active', 'is_featured')
@@ -22,7 +23,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title", )}
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     list_display = ('title', 'slug', 'category', 'product_image', 'is_active', 'is_featured', 'updated_at')
     list_editable = ('slug', 'category', 'is_active', 'is_featured')
     list_filter = ('category', 'is_active', 'is_featured')
@@ -30,7 +31,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('title', 'category', 'short_description')
     prepopulated_fields = {"slug": ("title", )}
 
-class CartAdmin(admin.ModelAdmin):
+class CartAdmin(TranslationAdmin):
     list_display = ('user', 'product', 'quantity', 'created_at')
     list_editable = ('quantity',)
     list_filter = ('created_at',)
@@ -38,7 +39,7 @@ class CartAdmin(admin.ModelAdmin):
     search_fields = ('user', 'product')
 
 
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(TranslationAdmin):
     list_display = ('user', 'product', "address", 'quantity', 'status', 'ordered_date')
     list_editable = ('status',)
     list_filter = ('status', 'ordered_date')
