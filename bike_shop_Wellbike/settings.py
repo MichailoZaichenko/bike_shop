@@ -97,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'uk'
 
 TIME_ZONE = 'UTC'
 
@@ -108,12 +108,16 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('ru', _('Russian')),
+    ('uk', _('Ukrainian')),
     ('en', _('English')),
 ]
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'ru'
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uk'
 MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'en'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'lacale'
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/

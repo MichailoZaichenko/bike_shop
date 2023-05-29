@@ -6,12 +6,12 @@ class CategoryTranslationOptions(TranslationOptions):
 
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
-    fields = ('title', 'short_description', 'detail_description', 'category')
+    fields = ('title', 'short_description', 'detail_description')
 
 @register(Cart)
 class CartTranslationOptions(TranslationOptions):
-    fields = ('product',)
+    fields = ()
 
 @register(Order)
 class OrderTranslationOptions(TranslationOptions):
-    fields = ('address', 'product', 'status')
+    fields = ('status',)

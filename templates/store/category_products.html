@@ -38,7 +38,7 @@
                         {% if categories %}
                             {% for cat in categories %}
                                 <a href="{% url 'store:category-products' cat.slug %}">
-                                    <div class="py-2 px-4 {% if category == cat %}bg-dark text-white {% else %}bg-light{% endif %} mb-3">
+                                    <div class="py-2 px-4 {% if category == cat %}bg-dark text-white {% else %}{% endif %} mb-3">
                                         <strong class="small text-uppercase font-weight-bold">{{ cat.title }}</strong>
                                     </div>
                                 </a>
