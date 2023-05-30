@@ -49,7 +49,7 @@ ROOT_URLCONF = 'bike_shop_Wellbike.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'store/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,7 +116,7 @@ MODELTRANSLATION_DEFAULT_LANGUAGE = 'uk'
 MODELTRANSLATION_PREPOPULATE_LANGUAGE = 'en'
 
 LOCALE_PATHS = [
-    BASE_DIR / 'lacale'
+    BASE_DIR / 'locale',
 ]
 
 # Static files (CSS, JavaScript, Images)

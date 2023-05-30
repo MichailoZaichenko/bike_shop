@@ -64,11 +64,10 @@
 {#                бажане</a>#}
 {#                  <br>#}
               <ul class="list-unstyled small d-inline-block">
-                <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">SKU:</strong><span class="ml-2 text-muted">{{product.sku}}</span></li>
-                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase
-                text-dark">Категорія:</strong><a class="reset-anchor ml-2" href=
+                <li class="px-3 py-2 mb-1"><strong class="text-uppercase">SKU:</strong><span class="ml-2 text-muted">{{product.sku}}</span></li>
+                <li class="px-3 py-2 mb-1"><strong class="text-uppercase">Категорія:</strong><a class="reset-anchor ml-2 text-muted" href=
                         "{% url 'store:category-products' product.category.slug %}">{{product.category}}</a></li>
-                <li class="px-3 py-2 mb-1 bg-white text-muted"><strong class="text-uppercase text-dark">Теги:</strong><a class="reset-anchor ml-2" href="#">Інновація</a></li>
+                <li class="px-3 py-2 mb-1"><strong class="text-uppercase">Теги:</strong><a class="reset-anchor ml-2 text-muted" href="#">Інновація</a></li>
               </ul>
             </div>
           </div>
@@ -80,13 +79,13 @@
           </ul>
           <div class="tab-content mb-5" id="myTabContent">
             <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-              <div class="p-4 p-lg-5 bg-white">
-                <h6 class="text-uppercase">Опис продукту </h6>
-                <p class="text-muted text-small mb-0">{{product.detail_description}}</p>
+              <div class="p-4 p-lg-5">
+                <h5 class="text-uppercase">Опис продукту </h5>
+                <p class="text-small mb-4">{{product.detail_description}}</p>
               </div>
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-              <div class="p-4 p-lg-5 bg-white">
+              <div class="p-4 p-lg-5">
                 <div class="row">
                   <div class="col-lg-8">
                     <div class="media mb-3"><img class="rounded-circle" src="{% static 'img/customer-1.png' %}" alt="" width="50">

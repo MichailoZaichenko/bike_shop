@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 #Todo Create your models here.
 
 class FeedBack(models.Model):
@@ -52,6 +53,8 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('store:all-categories')
 
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name="Product Title")
@@ -74,6 +77,8 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('store:product-detail', kwargs={'slug':self.slug})
 
 class Cart(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)

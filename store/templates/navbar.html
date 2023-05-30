@@ -25,10 +25,10 @@
                                 class="custom-text">WellBike</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'store:main' %}">{% translate 'Як обрати?' %}</a>
+                        <a class="nav-link" href="{% url 'store:main' %}">{% trans 'Як обрати?' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'store:home' %}">{% translate 'Головна' %}</a>
+                        <a class="nav-link" href="{% url 'store:home' %}">{% trans 'Головна' %}</a>
                     </li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
                                                      data-toggle="dropdown" aria-haspopup="true"
@@ -51,10 +51,10 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'store:about' %}"> {% trans "Про нас" %}</a>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         <div id="toggle-theme" class="btn btn-primary">🌣</div>
                     </li>
-                    <li class="nav-item">
+                    <li>
                         {% load i18n %}
                         <form action="{% url 'set_language' %}" method="post" class="form-inline">
                             {% csrf_token %}
