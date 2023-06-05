@@ -31,7 +31,7 @@ class ProductAdmin(TranslationAdmin):
     search_fields = ('title', 'category', 'short_description')
     prepopulated_fields = {"slug": ("title", )}
 
-class CartAdmin(TranslationAdmin):
+class CartAdmin(admin.ModelAdmin):
     list_display = ('user', 'product', 'quantity', 'created_at')
     list_editable = ('quantity',)
     list_filter = ('created_at',)

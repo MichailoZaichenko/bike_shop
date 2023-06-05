@@ -1,10 +1,5 @@
 import django
 from django.utils import timezone
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from django.contrib.auth.models import User
-from django.core.mail import send_mail
-from django.db.models.signals import post_save
 from store.models import Address, Cart, Category, Order, Product, FeedBack, PayingWay
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegistrationForm, AddressForm, FeedbackForm, PayingWayForm

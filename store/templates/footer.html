@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 {% endblock head %}
@@ -6,36 +7,35 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4">
-                <h3>Вело Магазин</h3>
-                <p>Ми - вело магазином з великим досвідом. Наші фахівці допоможуть вам підібрати
-                    потрібний велосипед, зробити його налаштування та ремонт.</p>
+                <h3>{% trans 'Вело Магазин' %}</h3>
+                <p>{% trans 'Ми - вело магазином з великим досвідом. Наші фахівці допоможуть вам підібрати потрібний велосипед, зробити його налаштування та ремонт.' %}</p>
             </div>
             <div class="col-12 col-md-4">
-                <h3>Контакти</h3>
+                <h3>{% trans 'Контакти' %}</h3>
                 <ul>
-                    <li><p>Адреса: м.Дніпро, вул. Бебра, 123</p></li>
-                    <li>Телефон: +380 98 493 00 74</li>
-                    <li><p>Email <a href="https://mail.google.com/" target="_blank">michailo.zaichenko@gmail.com</a></p>
+                    <li><p>{% trans 'Адреса: м.Дніпро, вул. Бебра, 123' %}</p></li>
+                    <li>{% trans 'Телефон: +380 98 493 00 74' %}</li>
+                    <li><p>{% trans 'Пошта' %} <a href="https://mail.google.com/" target="_blank">michailo.zaichenko@gmail.com</a></p>
                     </li>
                 </ul>
             </div>
             <div class="col-12 col-md-4">
-                <h3>Посилання</h3>
+                <h3>{% trans 'Посилання' %}</h3>
                 <ul>
-                    <li><a class="nav-link active" href="{% url 'store:main' %}">Головна</a></li>
-                    <li><a class="nav-link active" href="{% url 'store:home' %}">Каталог</a></li>
-                    <li><a class="nav-link" href="{% url 'store:contacts' %}">Контакти</a></li>
-                    <li><a class="nav-link" href="{% url 'store:about' %}">Про нас</a></li>
+                    <li><a class="nav-link active" href="{% url 'store:main' %}">{% trans 'Головна' %} </a></li>
+                    <li><a class="nav-link active" href="{% url 'store:home' %}"> {% trans 'Каталог' %}</a></li>
+                    <li><a class="nav-link" href="{% url 'store:contacts' %}">{% trans 'Контакти' %} </a></li>
+                    <li><a class="nav-link" href="{% url 'store:about' %}">{% trans 'Про нас' %}</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="credits">
-        <p>© 2023 Вело Магазин</p>
+        <p>© 2023 {% trans 'Вело Магазин' %}</p>
     </div>
     <div class="col-lg-6 text-lg-right">
-        <p class="small text-muted mb-0">Сайт зроблений <a class="text-white reset-anchor"
+        <p class="small text-muted mb-0">{% trans 'Сайт зроблений' %} <a class="text-white reset-anchor"
                                                            href="https://www.linkedin.com/in/michailo-zaichenko-a90048266/"
-                                                           target="_blank">Михайлом Зайченко</a></p>
+                                                           target="_blank">{% trans 'Михайлом Зайченко' %}</a></p>
     </div>
 </footer>

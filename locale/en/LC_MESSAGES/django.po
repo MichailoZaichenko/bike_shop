@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-04 13:01+0300\n"
+"POT-Creation-Date: 2023-06-05 12:08+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,61 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .\store\templates\footer.html:9 .\store\templates\footer.html:33
+msgid "Вело Магазин"
+msgstr "Bicycle Shop"
+
+#: .\store\templates\footer.html:10
+msgid ""
+"Ми - вело магазином з великим досвідом. Наші фахівці допоможуть вам "
+"підібрати потрібний велосипед, зробити його налаштування та ремонт."
+msgstr "We are a leading store with extensive experience. Our experts will help you"
+"choose the right bike, adjust and repair it."
+
+#: .\store\templates\footer.html:13 .\store\templates\footer.html:26
+#: .\store\templates\navbar.html:49
+msgid "Контакти"
+msgstr "Contacts"
+
+#: .\store\templates\footer.html:15
+msgid "Адреса: м.Дніпро, вул. Бебра, 123"
+msgstr "Address: Dnipro, str. Bebra, 123"
+
+#: .\store\templates\footer.html:16
+msgid "Телефон: +380 98 493 00 74"
+msgstr "Phone: +380 98 493 00 74"
+
+#: .\store\templates\footer.html:17
+msgid "Пошта"
+msgstr "Email"
+
+#: .\store\templates\footer.html:22
+msgid "Посилання"
+msgstr "Links"
+
+#: .\store\templates\footer.html:24 .\store\templates\navbar.html:31
+msgid "Головна"
+msgstr "Main"
+
+#: .\store\templates\footer.html:25
+msgid "Каталог"
+msgstr "Catalogue"
+
+#: .\store\templates\footer.html:27 .\store\templates\navbar.html:52
+msgid "Про нас"
+msgstr "About us"
+
+#: .\store\templates\footer.html:36
+msgid "Сайт зроблений"
+msgstr "The site is made by"
+
+#: .\store\templates\footer.html:38
+msgid "Михайлом Зайченко"
+msgstr "Mykhailo Zaichenko"
+
 #: .\store\templates\navbar.html:28
 msgid "Як обрати?"
 msgstr "How to choose?"
-
-#: .\store\templates\navbar.html:31
-msgid "Головна"
-msgstr "Main"
 
 #: .\store\templates\navbar.html:35
 msgid "Крамниця"
@@ -33,14 +81,6 @@ msgstr "Store"
 #: .\store\templates\navbar.html:45
 msgid "Всі категорії"
 msgstr "All categories"
-
-#: .\store\templates\navbar.html:49
-msgid "Контакти"
-msgstr "Contacts"
-
-#: .\store\templates\navbar.html:52
-msgid "Про нас"
-msgstr "About us"
 
 #: .\store\templates\navbar.html:84 .\store\templates\navbar.html:96
 msgid "Кошик"
@@ -60,23 +100,28 @@ msgstr "Change password"
 
 #: .\store\templates\navbar.html:103
 msgid "Вийти"
-msgstr ""
+msgstr "Log out"
 
 #: .\store\templates\navbar.html:107
 msgid "Увійти"
-msgstr "Log out"
+msgstr "Log in"
 
 #: .\store\templates\navbar.html:108
 msgid "Створити акаунт"
 msgstr "Create an account"
 
 #: .\store\templates\registration\password_reset_email.html:2
-#, python-format
+#, fuzzy, python-format
+#| msgid ""
+#| "Ви отримали цей електронний лист, оскільки надіслали запит на скидання "
+#| "пароля для свого облікового запису користувача за адресою wellbike.up."
+#| "railway.app"
 msgid ""
 "Ви отримали цей електронний лист, оскільки надіслали запит на скидання "
-"пароля для свого облікового запису користувача за адресою wellbike.up.railway.app"
-msgstr "You received this email because you sent a reset request "
-"password for your user account at wellbike.up.railway.app"
+"пароля для свого облікового запису користувача за адресою %(site_name)s."
+msgstr ""
+"You received this email because you sent a reset request password for your "
+"user account at wellbike.up.railway.app"
 
 #: .\store\templates\registration\password_reset_email.html:4
 msgid "Будь ласка, перейдіть на наступну сторінку та виберіть новий пароль:"
@@ -94,4 +139,5 @@ msgstr "Thank you for using our site!"
 #, python-format
 msgid "%(site_name)s команда"
 msgstr ""
+
 
