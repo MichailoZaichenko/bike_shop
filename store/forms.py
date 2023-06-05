@@ -35,12 +35,10 @@ class LoginForm(AuthenticationForm):
 class PayingWayForm(forms.ModelForm):
     class Meta:
         model = PayingWay
-        fields = ['card_number', 'CVV']
-        labels = {'card_number':"Номер картки", 'CVV':'CVV'}
+        fields = ['card_number', ]
+        labels = {'card_number':"Номер картки", }
         widgets = {'card_number': forms.TextInput(attrs={'input_type': 'number','class': 'form-control', 'id':'card_number',
-                                                 'placeholder': 'Введіть свій номер картки'}),
-                   'CVV': forms.TextInput(attrs={'input_type': 'number','class': 'form-control', 'id':'cvv', 'placeholder':
-                       'Введіть свій CVV'})}
+                                                 'placeholder': 'Введіть свій номер картки'}),}
 
     def clean_card_number(self):
         card_number = self.cleaned_data['card_number']
@@ -48,17 +46,17 @@ class PayingWayForm(forms.ModelForm):
             raise forms.ValidationError("Длина номера карты - 16 символов")
         return card_number
 
-    def clean(self):
-        cleaned_data = super().clean()
-        card_number = cleaned_data.get('card_number')
-        cvv = cleaned_data.get('CVV')
-        if not card_number:
-            raise forms.ValidationError("Поле 'Номер картки' обязательно для заполнения.")
-        if not cvv:
-            raise forms.ValidationError("Поле 'CVV' обязательно для заполнения.")
-        if len(str(cvv)) != 3:
-            raise forms.ValidationError("CVV должен состоять из 3 цифр.")
-        return cleaned_data
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     card_number = cleaned_data.get('card_number')
+    #     cvv = cleaned_data.get('CVV')
+    #     if not card_number:
+    #         raise forms.ValidationError("Поле 'Номер картки' обязательно для заполнения.")
+    #     if not cvv:
+    #         raise forms.ValidationError("Поле 'CVV' обязательно для заполнения.")
+    #     if len(str(cvv)) != 3:
+    #         raise forms.ValidationError("CVV должен состоять из 3 цифр.")
+    #     return cleaned_data
 
 class AddressForm(forms.ModelForm):
     class Meta:

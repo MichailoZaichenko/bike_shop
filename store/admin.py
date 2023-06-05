@@ -10,9 +10,9 @@ class AddressAdmin(admin.ModelAdmin):
     search_fields = ('locality', 'city', 'state')
 
 class PayingWayAdmin(admin.ModelAdmin):
-    list_display = ('user', 'card_number', 'CVV')
+    list_display = ('user', 'card_number')
     list_per_page = 10
-    search_fields = ('card_number', 'CVV')
+    search_fields = ('card_number',)
 
 class CategoryAdmin(TranslationAdmin):
     list_display = ('title', 'slug', 'category_image', 'is_active', 'is_featured', 'updated_at')

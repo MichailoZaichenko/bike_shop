@@ -155,8 +155,7 @@ class PayingWayView(View):
         if form.is_valid():
             user = request.user
             card_number = form.cleaned_data['card_number']
-            CVV = form.cleaned_data['CVV']
-            reg = PayingWay(user=user, card_number=card_number, CVV=CVV)
+            reg = PayingWay(user=user, card_number=card_number)
             reg.save()
             messages.success(request, "Нова картка додана успішно")
             return redirect('store:profile')
