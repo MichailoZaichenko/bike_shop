@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load cache %}
 {% block head %}
     <link href="{% static 'css/header.css' %}" rel="stylesheet" type="text/css">
     <link href="{% static 'css/button_back_col.css' %}" rel="stylesheet" type="text/css">
@@ -34,12 +35,14 @@
                                                      data-toggle="dropdown" aria-haspopup="true"
                                                      aria-expanded="false">{% trans 'Крамниця' %}</a>
                         <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
-                            {% if categories_menu %}
-                                {% for cat_menu in categories_menu %}
-                                    <a class="dropdown-item border-0 transition-link"
-                                       href="{% url 'store:category-products' cat_menu.slug %}">{{ cat_menu.title }}</a>
-                                {% endfor %}
-                            {% endif %}
+                            {% cache 604800 categorie_list %}
+                                {% if categories_menu %}
+                                    {% for cat_menu in categories_menu %}
+                                        <a class="dropdown-item border-0 transition-link"
+                                           href="{% url 'store:category-products' cat_menu.slug %}">{{ cat_menu.title }}</a>
+                                    {% endfor %}
+                                {% endif %}
+                            {% endcache %}
                             <hr>
                             <a class="dropdown-item border-0 transition-link"
                                href="{% url 'store:all-categories' %}">{% trans 'Всі категорії' %}</a>
@@ -91,10 +94,12 @@
 
                             <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
 
-                                <a class="dropdown-item border-0 transition-link" href="{% url 'store:profile' %}">{% trans 'Профіль' %}</a>
+                                <a class="dropdown-item border-0 transition-link"
+                                   href="{% url 'store:profile' %}">{% trans 'Профіль' %}</a>
                                 <a class="dropdown-item border-0 transition-link"
                                    href="{% url 'store:cart' %}">{% trans 'Кошик' %}</a>
-                                <a class="dropdown-item border-0 transition-link" href="{% url 'store:orders' %}">{% trans 'Замовлення' %}</a>
+                                <a class="dropdown-item border-0 transition-link"
+                                   href="{% url 'store:orders' %}">{% trans 'Замовлення' %}</a>
                                 <a class="dropdown-item border-0 transition-link" href="
 {% url 'store:password-change' %}"> {% trans 'Змінити пароль' %}</a>
 
@@ -104,8 +109,10 @@
                             </div>
                         </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'store:login' %}">{% trans 'Увійти' %}</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'store:register' %}">{% trans 'Створити акаунт' %}</a>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'store:login' %}">{% trans 'Увійти' %}</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link"
+                                                href="{% url 'store:register' %}">{% trans 'Створити акаунт' %}</a>
                         </li>
                     {% endif %}
                 </ul>
