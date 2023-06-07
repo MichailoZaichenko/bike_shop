@@ -57,11 +57,11 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('store:all-categories')
 
-    def save(self, *args, **kwargs):
-        key = make_template_fragment_key('categorie_list')
-        cache.delete(key)
-
-        return super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     key = make_template_fragment_key('categorie_list')
+    #     cache.delete(key)
+    #
+    #     return super().save(*args, **kwargs)
 
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name="Product Title")
