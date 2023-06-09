@@ -50,6 +50,5 @@ urlpatterns = [
 
     path('product/test/', views.test, name="test"),
 
-
 ]
 handler404 = views.custom_handler_404

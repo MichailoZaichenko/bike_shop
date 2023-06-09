@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{#{% load cache %}#}
 
 {% block head %}
     <link href="{% static 'css/sorting.css' %}" rel="stylesheet" type="text/css">
@@ -34,17 +35,17 @@
                     <!-- SHOP SIDEBAR-->
                     <div class="col-lg-3 order-2 order-lg-1">
                         <h5 class="text-uppercase mb-4">Категорії</h5>
-
-                        {% if categories %}
-                            {% for cat in categories %}
-                                <a href="{% url 'store:category-products' cat.slug %}">
-                                    <div class="py-2 px-4 {% if category == cat %}bg-dark text-white {% else %}{% endif %} mb-3">
-                                        <strong class="small text-uppercase font-weight-bold">{{ cat.title }}</strong>
-                                    </div>
-                                </a>
-                            {% endfor %}
-                        {% endif %}
-
+{#                        {% cache 604800 categorie_list %}#}
+                            {% if categories %}
+                                {% for cat in categories %}
+                                    <a href="{% url 'store:category-products' cat.slug %}">
+                                        <div class="py-2 px-4 {% if category == cat %}bg-dark text-white {% else %}{% endif %} mb-3">
+                                            <strong class="small text-uppercase font-weight-bold">{{ cat.title }}</strong>
+                                        </div>
+                                    </a>
+                                {% endfor %}
+                            {% endif %}
+{#                        {% endcache %}#}
 
                     </div>
                     <!-- SHOP LISTING-->
@@ -57,7 +58,7 @@
                             <div class="col-lg-6">
                                 <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
                                     <li class="list-inline-item">
-{#                                        <label for="sort_order" class="mr-2 mb-0">Відсортувати:</label>#}
+                                        {#                                        <label for="sort_order" class="mr-2 mb-0">Відсортувати:</label>#}
                                         <form method="post" class="d-flex align-items-center">
                                             {% csrf_token %}
                                             <select name="sort_order" id="sort_order" class="form-select selectpicker">
@@ -77,7 +78,7 @@
 
                             {% if products %}
                                 {#                                Todo fix it and padination#}
-{#                                {% for product in products|slice:":12" %}#}
+                                {#                                {% for product in products|slice:":12" %}#}
                                 {% for product in products %}
                                     <!-- PRODUCT-->
                                     <div class="col-lg-4 col-sm-6" style="height: 300px">
