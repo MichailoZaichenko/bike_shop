@@ -52,4 +52,4 @@ urlpatterns = [
 
 ]
 
-handler404 = "helpers.views.custom_handler_404"
+handler404 = "store.views.custom_handler_404"
