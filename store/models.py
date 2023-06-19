@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.cache import  cache
 from django.core.cache.utils import make_template_fragment_key
-#Todo Create your models here.
 
 class FeedBack(models.Model):
     user = models.ForeignKey(User, verbose_name="User", on_delete=models.CASCADE)
@@ -57,11 +56,11 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('store:all-categories')
 
-    # def save(self, *args, **kwargs):
-    #     key = make_template_fragment_key('categorie_list')
-    #     cache.delete(key)
-    #
-    #     return super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        key = make_template_fragment_key('categorie_list')
+        cache.delete(key)
+
+        return super().save(*args, **kwargs)
 
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name="Product Title")

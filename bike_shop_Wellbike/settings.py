@@ -10,6 +10,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
+
 SECRET_KEY = 'django-insecure-3%y3laftm62q0zaj+s7#p-xqq9(&#q+)s8)p-&#&bz*0$!xu$0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -76,11 +83,10 @@ WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 #     }
 # }
 
-import dj_database_url
-
+# Todo for railway
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway',
         'USER': 'postgres',
         'PASSWORD': 'mRBFp13xxf5SIRgsGZWJ',
@@ -88,6 +94,22 @@ DATABASES = {
         'PORT': '6380',
     }
 }
+
+# import dj_database_url
+#
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://wellbikedb_user:dX5ThxDmbO9Diu8doPgPjAEnSaQdT3T8@dpg-ci1e3cvdvk4kgooavb00-a.frankfurt-postgres.render.com/wellbikedb')
+#
+# }
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache'),
+    },
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
