@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 
+
 def home(request):
     categories = Category.objects.filter(is_active=True, is_featured=True)[:6]
     products = Product.objects.filter(is_active=True, is_featured=True)[:12]
