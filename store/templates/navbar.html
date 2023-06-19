@@ -26,14 +26,14 @@
                                 class="custom-text">WellBike</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'store:main' %}">{% trans 'Як обрати?' %}</a>
+                        <a class="nav-link" href="{% url 'store:main' %}">Як обрати?</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'store:home' %}">{% trans 'Головна' %}</a>
+                        <a class="nav-link" href="{% url 'store:home' %}">Головна</a>
                     </li>
                     <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
                                                      data-toggle="dropdown" aria-haspopup="true"
-                                                     aria-expanded="false">{% trans 'Крамниця' %}</a>
+                                                     aria-expanded="false">Крамниця</a>
                         <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
                             {% cache 604800 categorie_list %}
                                 {% if categories_menu %}
@@ -45,7 +45,7 @@
                             {% endcache %}
                             <hr>
                             <a class="dropdown-item border-0 transition-link"
-                               href="{% url 'store:all-categories' %}">{% trans 'Всі категорії' %}</a>
+                               href="{% url 'store:all-categories' %}"> Всі категорії' %}</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -57,34 +57,34 @@
                     <li>
                         <div id="toggle-theme" class="btn btn-primary">🌣</div>
                     </li>
-                    <li>
-                        {% load i18n %}
-                        <form action="{% url 'set_language' %}" method="post" class="form-inline">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}">
-                            <div class="input-group">
-                                <select name="language" class="form-control">
-                                    {% get_current_language as LANGUAGE_CODE %}
-                                    {% get_available_languages as LANGUAGES %}
-                                    {% get_language_info_list for LANGUAGES as languages %}
-                                    {% for language in languages %}
-                                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
-                                                selected{% endif %}>
-                                            {{ language.name_local }} ({{ language.code }})
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary">Go</button>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
+{#                    <li>#}
+{#                        {% load i18n %}#}
+{#                        <form action="{% url 'set_language' %}" method="post" class="form-inline">#}
+{#                            {% csrf_token %}#}
+{#                            <input name="next" type="hidden" value="{{ redirect_to }}">#}
+{#                            <div class="input-group">#}
+{#                                <select name="language" class="form-control">#}
+{#                                    {% get_current_language as LANGUAGE_CODE %}#}
+{#                                    {% get_available_languages as LANGUAGES %}#}
+{#                                    {% get_language_info_list for LANGUAGES as languages %}#}
+{#                                    {% for language in languages %}#}
+{#                                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}#}
+{#                                                selected{% endif %}>#}
+{#                                            {{ language.name_local }} ({{ language.code }})#}
+{#                                        </option>#}
+{#                                    {% endfor %}#}
+{#                                </select>#}
+{#                                <div class="input-group-append">#}
+{#                                    <button type="submit" class="btn btn-primary">Go</button>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </form>#}
+{#                    </li>#}
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'store:cart' %}"> <i
-                                class="fas fa-dolly-flatbed mr-1 text-gray"></i> {% trans 'Кошик' %}<small
+                                class="fas fa-dolly-flatbed mr-1 text-gray"></i>Кошик<small
                                 class="text-gray">({{ cart_items.count }})</small></a></li>
 
                         <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
@@ -95,24 +95,24 @@
                             <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
 
                                 <a class="dropdown-item border-0 transition-link"
-                                   href="{% url 'store:profile' %}">{% trans 'Профіль' %}</a>
+                                   href="{% url 'store:profile' %}"> Профіль</a>
                                 <a class="dropdown-item border-0 transition-link"
-                                   href="{% url 'store:cart' %}">{% trans 'Кошик' %}</a>
+                                   href="{% url 'store:cart' %}">Кошик</a>
                                 <a class="dropdown-item border-0 transition-link"
-                                   href="{% url 'store:orders' %}">{% trans 'Замовлення' %}</a>
+                                   href="{% url 'store:orders' %}">Замовлення</a>
                                 <a class="dropdown-item border-0 transition-link" href="
-{% url 'store:password-change' %}"> {% trans 'Змінити пароль' %}</a>
+{% url 'store:password-change' %}">  Змінити пароль</a>
 
                                 <hr>
                                 <a class="dropdown-item border-0 transition-link"
-                                   href="{% url 'store:logout' %}">{% trans 'Вийти' %}</a>
+                                   href="{% url 'store:logout' %}">Вийти</a>
                             </div>
                         </li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'store:login' %}">{% trans 'Увійти' %}</a>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'store:login' %}">Увійти</a>
                         </li>
                         <li class="nav-item"><a class="nav-link"
-                                                href="{% url 'store:register' %}">{% trans 'Створити акаунт' %}</a>
+                                                href="{% url 'store:register' %}">Створити акаунт</a>
                         </li>
                     {% endif %}
                 </ul>
