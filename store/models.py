@@ -62,6 +62,12 @@ class Category(models.Model):
 
         return super().save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        key = make_template_fragment_key('categorie_list')
+        cache.delete(key)
+
+        return super().delete(*args, **kwargs)
+
 class Product(models.Model):
     title = models.CharField(max_length=150, verbose_name="Product Title")
     slug = models.SlugField(max_length=160, verbose_name="Product Slug")

@@ -3,9 +3,10 @@
 /*    background-image: url("../img/img.png");*/
 /*}*/
 img {
-   width: 75%;
-   display: block;
-   margin: auto;
+    width: 75%;
+    display: block;
+    margin: auto;
+    border-radius: 10px;
 }
 
 .aleart {
@@ -14,8 +15,8 @@ img {
 }
 
 .p-border-yellow {
-  border: rgb(207, 178, 11) 4px solid;
-  padding: 10px;
+    border: rgb(207, 178, 11) 4px solid;
+    padding: 10px;
 }
 
 table {
