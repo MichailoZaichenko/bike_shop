@@ -1,5 +1,9 @@
 from django.contrib import admin
 from .models import Address, Category, Product, Cart, Order, FeedBack, PayingWay
+
+from import_export.admin import ImportExportActionModelAdmin
+from import_export import resources, fields
+from import_export.widgets import ForeignKeyWidget
 # Register your models here.
 
 class AddressAdmin(admin.ModelAdmin):
@@ -15,24 +19,30 @@ class PayingWayAdmin(admin.ModelAdmin):
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'category_image', 'is_active', 'is_featured', 'updated_at')
-    list_editable = ('slug', 'is_active', 'is_featured')
+    list_editable = ('is_active', 'is_featured')
     list_filter = ('is_active', 'is_featured')
     list_per_page = 10
     search_fields = ('title', 'description')
     prepopulated_fields = {"slug": ("title", )}
 
+class Product_Resurse(resources.ModelResource):
+    category = fields.Field(column_name='category', attribute='category', widget=ForeignKeyWidget(Category, 'title'))
+    class Meta:
+        model = Product
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(ImportExportActionModelAdmin):
+    resource_class = Product_Resurse
     list_display = ('title', 'slug', 'category', 'product_image', 'is_active', 'is_featured', 'updated_at')
-    list_editable = ('slug', 'category', 'is_active', 'is_featured')
-    list_filter = ('category', 'is_active', 'is_featured')
-    list_per_page = 10
-    search_fields = ('title', 'category', 'short_description')
-    prepopulated_fields = {"slug": ("title", )}
+# class ProductAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'slug', 'category', 'product_image', 'is_active', 'is_featured', 'updated_at')
+#     list_editable = ('category', 'is_active', 'is_featured')
+#     list_filter = ('category', 'is_active', 'is_featured')
+#     list_per_page = 10
+#     search_fields = ('title', 'category', 'short_description')
+#     prepopulated_fields = {"slug": ("title", )}
 
 class CartAdmin(admin.ModelAdmin):
     list_display = ('user', 'product', 'quantity', 'created_at')
-    list_editable = ('quantity',)
     list_filter = ('created_at',)
     list_per_page = 20
     search_fields = ('user', 'product')
@@ -47,7 +57,6 @@ class OrderAdmin(admin.ModelAdmin):
 
 class FeedbeckAdmin(admin.ModelAdmin):
     list_display = ('user', 'created_at', "email", 'feedback')
-    list_editable = ("email",'feedback',)
     list_filter = ("created_at",)
     list_per_page = 20
     search_fields = ('user', 'created_at', "email", 'feedback')

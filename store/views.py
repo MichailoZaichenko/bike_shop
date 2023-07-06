@@ -3,12 +3,13 @@ from django.utils import timezone
 from store.models import Address, Cart, Category, Order, Product, FeedBack, PayingWay
 from django.shortcuts import redirect, render, get_object_or_404
 from .forms import RegistrationForm, AddressForm, FeedbackForm, PayingWayForm
-from django.contrib import messages
 from django.views import View
 import decimal
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.conf import settings
+from django.core.mail import send_mail
+from django.contrib import messages
 
 
 def home(request):
@@ -129,19 +130,19 @@ class FeedbackView(View):
             feedback = form.cleaned_data['feedback']
             reg = FeedBack(user=user, feedback=feedback, created_at=timezone.now())
             reg.save()
-
-            # Todo Отправка письма на email пользователя
-            # subject = 'Ваш відгук успішно надіслано'
-            # message = 'Доброго дня! Ваш відгук успішно надіслано.'
-            # from_email = 'michailo.zaichenko@gmail.com'  # Укажите ваш email
-            # recipient_list = [email]
-            # send_mail(subject, message, from_email, recipient_list)
+            # Todo Email
+            # subject = 'Спасибі за ваш відгук!'
+            # message = 'Дякуємо за ваш відгук!'
+            # email_from = settings.DEFAULT_FROM_EMAIL
+            # recipient_list = [user.email]
+            # send_mail(subject, message, email_from, recipient_list)
 
             messages.success(request, "Вітаємо відгук надіслано успішно")
             return redirect('store:profile')
         else:
             your_account = request.user
             return render(request, 'store/contacts.html', {'form': form, 'your_account': your_account, })
+        
 
 
 @method_decorator(login_required, name='dispatch')
