@@ -64,7 +64,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
+# WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
