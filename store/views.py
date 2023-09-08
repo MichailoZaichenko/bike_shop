@@ -7,8 +7,8 @@ from django.views import View
 import decimal
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.conf import settings
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.contrib import messages
 
 
@@ -130,12 +130,11 @@ class FeedbackView(View):
             feedback = form.cleaned_data['feedback']
             reg = FeedBack(user=user, feedback=feedback, created_at=timezone.now())
             reg.save()
-            # Todo Email
-            # subject = 'Спасибі за ваш відгук!'
-            # message = 'Дякуємо за ваш відгук!'
-            # email_from = settings.DEFAULT_FROM_EMAIL
-            # recipient_list = [user.email]
-            # send_mail(subject, message, email_from, recipient_list)
+            # # Todo Email later when Це налаштування недоступне для вашого облікового запису. - removes
+            # html_body = render_to_string("email_templates/appointment_email.html")
+            # msg = EmailMultiAlternatives(subject="Ваш відгук був записан - WellBike", to=["michailo.zaichenko@gmail.com",])
+            # msg.attach_alternative(html_body, 'text/html')
+            # msg.send()
 
             messages.success(request, "Вітаємо відгук надіслано успішно")
             return redirect('store:profile')
