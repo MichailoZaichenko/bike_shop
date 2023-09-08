@@ -69,12 +69,12 @@ WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 #
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Todo for railway
 # DATABASES = {
@@ -88,12 +88,12 @@ WSGI_APPLICATION = 'bike_shop_Wellbike.wsgi.application'
 #     }
 # }
 
-import dj_database_url
-
-DATABASES = {
-    'default': dj_database_url.parse('postgres://wellbikedb_user:dX5ThxDmbO9Diu8doPgPjAEnSaQdT3T8@dpg-ci1e3cvdvk4kgooavb00-a.frankfurt-postgres.render.com/wellbikedb')
-
-}
+# import dj_database_url
+#
+# DATABASES = {
+#     'default': dj_database_url.parse('postgres://wellbikedb_user:dX5ThxDmbO9Diu8doPgPjAEnSaQdT3T8@dpg-ci1e3cvdvk4kgooavb00-a.frankfurt-postgres.render.com/wellbikedb')
+#
+# }
 
 
 CACHES = {
